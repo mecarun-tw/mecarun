@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AngularMaterialModule } from 'src/app/_modules/angular-material/angular-material.module';
+import { NgxTranslateModule } from 'src/app/_modules/ngx-translate/ngx-translate.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AngularMaterialModule } from 'src/app/_modules/angular-material/angular
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    NgxTranslateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
