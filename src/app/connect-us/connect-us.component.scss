@@ -1,0 +1,14 @@
+@use '/src/app/_styles/global';
+
+.external-links-container {
+  display: flex;
+  justify-content: center;
+  margin: 32px;
+  gap: 64px;
+}
+
+.text-container {
+  margin: 0 128px;
+  border-left: 3px solid global.$theme-color-dark;
+  font-size: 24px;
+}

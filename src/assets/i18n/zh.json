@@ -1,5 +1,6 @@
 {
   "HELLO_MESSAGE": "{{name}}，你好！",
+  "LANGUAGE_BUTTON": "English",
   "MAIN_MENU": {
     "PRODUCTS": "產品列表",
     "CONNECT_US": "連絡我們"

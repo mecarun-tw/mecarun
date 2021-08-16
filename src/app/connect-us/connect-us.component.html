@@ -1,1 +1,22 @@
-<p>connect-us works!</p>
+<div class='external-links-container'>
+  <app-external-link-button
+    *ngFor="let link of externalLinks"
+    [externalUrl]="link.externalUrl"
+    [imageUrl]="link.imageUrl"
+    [size]="'100px'">
+  </app-external-link-button>
+</div>
+
+<div class='text-container'>
+  <pre>
+    我們是代理法國高科技機油的進口商
+    
+    各式特殊機油都有
+    
+    在台灣的聯絡電話是：0987-654-321
+    
+    EMAIL：danili9@live.com
+    
+    歡迎和我們聯絡
+  </pre>
+</div>

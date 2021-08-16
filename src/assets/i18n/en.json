@@ -1,5 +1,6 @@
 {
   "HELLO_MESSAGE": "Hello {{name}}!",
+  "LANGUAGE_BUTTON": "中文",
   "MAIN_MENU": {
     "PRODUCTS": "Products",
     "CONNECT_US": "Connect us"

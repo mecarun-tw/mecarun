@@ -1,5 +1,7 @@
+import { useAnimation } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { MenuLink } from 'src/app/_interfaces/menu-link';
@@ -19,11 +21,17 @@ export class AppComponent implements OnInit, OnDestroy {
     { display: 'MAIN_MENU.CONNECT_US', url: 'connect-us' },
   ];
 
+
+
   constructor(
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
+
+    this.translateService.use('zh');
+
     this.subscribeActivateLinkByUrlChange();
   }
 
@@ -34,6 +42,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   goto = (link: MenuLink): void => {
     this.router.navigate([link.url]);
+  }
+
+  toggleLanguage = () => {
+    console.log('current lang', this.translateService.currentLang)
+    if (this.translateService.currentLang === 'zh') {
+      this.translateService.use('en');
+    } else {
+      this.translateService.use('zh');
+    }
   }
 
   private subscribeActivateLinkByUrlChange = ():void => {
