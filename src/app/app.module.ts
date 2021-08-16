@@ -7,10 +7,14 @@ import { AppComponent } from './app.component';
 
 import { AngularMaterialModule } from 'src/app/_modules/angular-material/angular-material.module';
 import { NgxTranslateModule } from 'src/app/_modules/ngx-translate/ngx-translate.module';
+import { ConnectUsComponent } from './connect-us/connect-us.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConnectUsComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

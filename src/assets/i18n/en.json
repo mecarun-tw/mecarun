@@ -1,3 +1,7 @@
 {
-  "HELLO_MESSAGE": "Hello {{name}}!"
+  "HELLO_MESSAGE": "Hello {{name}}!",
+  "MAIN_MENU": {
+    "PRODUCTS": "Products",
+    "CONNECT_US": "Connect us"
+  }
 }

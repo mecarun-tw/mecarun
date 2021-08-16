@@ -1,3 +1,7 @@
 {
-  "HELLO_MESSAGE": "{{name}}，你好！"
+  "HELLO_MESSAGE": "{{name}}，你好！",
+  "MAIN_MENU": {
+    "PRODUCTS": "產品列表",
+    "CONNECT_US": "連絡我們"
+  }
 }

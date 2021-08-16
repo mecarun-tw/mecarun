@@ -1,0 +1,31 @@
+@use '_styles/global';
+
+:host {
+  display: flex;
+  justify-content: center;
+
+  .main-container {
+    min-height: 100vh;
+    background-color: global.$backgroud-color;
+
+    .main-menu{
+      height: 64px;
+      background-color: global.$theme-color-dark;
+
+      .menu-button {
+        height: 100%;
+        width: 128px;
+        padding: 0;
+        margin: 0 8px;
+        border-radius: 0;
+        color: white;
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .activate-menu-button {
+        border-bottom: 3px solid global.$theme-color-red;
+      }
+    }
+  }
+}
