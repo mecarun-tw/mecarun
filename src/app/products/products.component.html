@@ -1,1 +1,6 @@
-<p>products works!</p>
+<div class="product-card-container">
+  <app-product-card
+    *ngFor="let productKey of (productKeys$ | async)"
+    [productKey]="productKey">
+  </app-product-card>
+</div>

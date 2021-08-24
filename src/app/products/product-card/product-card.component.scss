@@ -1,0 +1,25 @@
+@use '/src/app/_styles/global';
+
+.product-card-container {
+  /* 512 192 */
+  height: 176px;
+  width: 496px;
+  padding: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 8px;
+  background-color: global.$backgroud-color;
+
+  .image-container {
+    height: 176px;
+    width: 176px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: global.$backgroud-color-light;
+  }
+
+  .text-container {
+    flex: 1 1 auto;
+  }
+}

@@ -4,7 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { MenuLink } from 'src/app/_interfaces/menu-link';
+import { MenuLink } from 'src/app/_interfaces/menu-link.interface';
 
 @Component({
   selector: 'app-root',

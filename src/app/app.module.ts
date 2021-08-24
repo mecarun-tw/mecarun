@@ -10,13 +10,15 @@ import { NgxTranslateModule } from 'src/app/_modules/ngx-translate/ngx-translate
 import { ConnectUsComponent } from './connect-us/connect-us.component';
 import { ProductsComponent } from './products/products.component';
 import { ExternalLinkButtonComponent } from './_elements/buttons/external-link-button/external-link-button.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConnectUsComponent,
     ProductsComponent,
-    ExternalLinkButtonComponent
+    ExternalLinkButtonComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
