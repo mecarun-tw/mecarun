@@ -1,5 +1,5 @@
-import { useAnimation } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Firestore, collection } from '@angular/fire/firestore';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -21,11 +21,10 @@ export class AppComponent implements OnInit, OnDestroy {
     { display: 'MAIN_MENU.CONNECT_US', url: 'connect-us' },
   ];
 
-
-
   constructor(
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private firestore: Firestore
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +32,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translateService.use('zh');
 
     this.subscribeActivateLinkByUrlChange();
+
+    const c = collection(this.firestore, 'test');
+    console.log(c.id)
   }
 
   ngOnDestroy(): void {

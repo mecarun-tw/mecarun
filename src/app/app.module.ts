@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 
 import { AngularMaterialModule } from 'src/app/_modules/angular-material/angular-material.module';
 import { NgxTranslateModule } from 'src/app/_modules/ngx-translate/ngx-translate.module';
+import { FirebaseModule } from './_modules/firebase/firebase.module';
+
 import { ConnectUsComponent } from './connect-us/connect-us.component';
 import { ProductsComponent } from './products/products.component';
 import { ExternalLinkButtonComponent } from './_elements/buttons/external-link-button/external-link-button.component';
@@ -27,7 +29,8 @@ import { ProductComponent } from './product/product.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    NgxTranslateModule
+    NgxTranslateModule,
+    FirebaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
