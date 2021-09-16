@@ -3,9 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ConnectUsComponent } from 'src/app/connect-us/connect-us.component';
 import { ProductsComponent } from 'src/app/products/products.component';
+import { ProductComponent } from 'src/app/product/product.component';
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
+  { path: 'product/:uuid', component: ProductComponent },
+  { path: 'product', redirectTo: 'products' },
   { path: 'connect-us', component: ConnectUsComponent },
   { path: '**', redirectTo: 'products'}
 ];

@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.productsService.readProductKeys().pipe(takeUntil(this.destroy$)).subscribe(this.productKeys$);
+    this.productsService.getProductKeys().pipe(takeUntil(this.destroy$)).subscribe(this.productKeys$);
   }
 
   ngOnDestroy(): void {

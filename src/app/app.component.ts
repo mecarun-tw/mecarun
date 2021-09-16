@@ -45,7 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   toggleLanguage = () => {
-    console.log('current lang', this.translateService.currentLang)
     if (this.translateService.currentLang === 'zh') {
       this.translateService.use('en');
     } else {
