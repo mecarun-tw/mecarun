@@ -10,33 +10,63 @@ import { ApiInterface } from "./api.interface";
 })
 export class Api implements ApiInterface {
 
-  private productKeys$ = new BehaviorSubject<ProductKey[]>([
-    {
-      uuid: 'PRODUCT_KEY_UUID_0',
-      name: 'Product Name',
-      price: 123,
-      shortDescription: 'short description. short description. short description. short description. short description. ',
-      thumbnailUrl: ''
-    },{
-      uuid: 'PRODUCT_KEY_UUID_1',
-      name: 'Product Name',
-      price: 123,
-      shortDescription: 'short description. short description. short description. short description. short description. ',
-      thumbnailUrl: ''
-    },{
-      uuid: 'PRODUCT_KEY_UUID_2',
-      name: 'Product Name',
-      price: 123,
-      shortDescription: 'short description. short description. short description. short description. short description. ',
-      thumbnailUrl: ''
-    }
-  ]);
+  private productKeys$ = new BehaviorSubject<LanguagePackage<ProductKey[]>>({
+    uuid: '',
+    languages:new Map([
+      [
+        'zh',
+        [
+          {
+            uuid: 'PRODUCT_KEY_UUID_0',
+            name: '產品名稱',
+            price: 123,
+            shortDescription: '簡短描述。簡短描述。簡短描述。簡短描述。簡短描述。',
+            thumbnailUrl: ''
+          },{
+            uuid: 'PRODUCT_KEY_UUID_1',
+            name: '產品名稱',
+            price: 123,
+            shortDescription: '簡短描述。簡短描述。簡短描述。簡短描述。簡短描述。',
+            thumbnailUrl: ''
+          },{
+            uuid: 'PRODUCT_KEY_UUID_2',
+            name: '產品名稱',
+            price: 123,
+            shortDescription: '簡短描述。簡短描述。簡短描述。簡短描述。簡短描述。',
+            thumbnailUrl: ''
+          }
+        ]
+      ], [
+        'en',
+        [
+          {
+            uuid: 'PRODUCT_KEY_UUID_0',
+            name: 'Product Name',
+            price: 123,
+            shortDescription: 'short description. short description. short description. short description. short description. ',
+            thumbnailUrl: ''
+          },{
+            uuid: 'PRODUCT_KEY_UUID_1',
+            name: 'Product Name',
+            price: 123,
+            shortDescription: 'short description. short description. short description. short description. short description. ',
+            thumbnailUrl: ''
+          },{
+            uuid: 'PRODUCT_KEY_UUID_2',
+            name: 'Product Name',
+            price: 123,
+            shortDescription: 'short description. short description. short description. short description. short description. ',
+            thumbnailUrl: ''
+          }
+        ]
+      ]
+    ])
+  });
 
   private products$ = new BehaviorSubject<LanguagePackage<Product>[]>([
     {
       uuid: 'PRODUCT_KEY_UUID_0',
-      languages: new Map([
-        [
+      languages: new Map([[
           'zh',{
             uuid: 'PRODUCT_KEY_UUID_0',
             name: '產品名稱',

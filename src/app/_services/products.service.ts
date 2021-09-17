@@ -6,6 +6,9 @@ import { Api } from 'src/app/_api/mock.api';
 import { Product, ProductKey } from 'src/app/_interfaces/product.interface';
 import { LanguagePackage } from 'src/app/_interfaces/language-package.interface';
 
+interface ProductsStorage extends LanguagePackage<ProductKey[]> {
+  productKeys$: BehaviorSubject<ProductKey[]|null>
+}
 interface ProductStorage extends LanguagePackage<Product> {
   product$: BehaviorSubject<Product|null>;
 }
@@ -14,7 +17,7 @@ interface ProductStorage extends LanguagePackage<Product> {
 })
 export class ProductsService {
 
-  private productKeys$ = new BehaviorSubject<ProductKey[]|null>(null);
+  private productKeys: ProductsStorage|null = null;
   private products = new Map<string, ProductStorage>();
 
   constructor(
@@ -23,10 +26,30 @@ export class ProductsService {
   ) { }
 
   getProductKeys = (): Observable<ProductKey[]|null> => {
-    if (this.productKeys$.getValue() === null) {
-      this.api.readProductKeys().subscribe(this.productKeys$);
+    if (this.productKeys !== null) {
+      return this.productKeys.productKeys$;
+    } else {
+      const productKeysLanguagePackage$ = this.api.readProductKeys();
+      const productKeys$ = new BehaviorSubject<ProductKey[]|null>(null);
+
+      productKeysLanguagePackage$.subscribe(productKeysLanguagePackage => {
+        this.productKeys = Object.assign({
+          productKeys$
+        }, productKeysLanguagePackage);
+      });
+
+      combineLatest([ // update if backend data or language change
+        productKeysLanguagePackage$,
+        this.translateService.onLangChange.pipe(map(e => e.lang), startWith(this.translateService.currentLang), distinctUntilChanged())
+      ]).pipe(
+        map(([productKeysLanguagePackage, language]) => {
+          return productKeysLanguagePackage?.languages.get(language)
+        }),
+        map(productKeys => (productKeys ? productKeys : null) as ProductKey[]|null),
+      ).subscribe(productKeys$);
+
+      return productKeys$;
     }
-    return this.productKeys$;
   }
 
   getProduct = (uuid: string): BehaviorSubject<Product|null> => {

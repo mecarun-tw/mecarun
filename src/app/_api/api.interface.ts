@@ -4,7 +4,7 @@ import { LanguagePackage } from "../_interfaces/language-package.interface";
 
 export interface ApiInterface {
   
-  readProductKeys: () => Observable<ProductKey[]>;
+  readProductKeys: () => Observable<LanguagePackage<ProductKey[]>|null>;
 
   readProduct: (uuid: string) => Observable<LanguagePackage<Product>|null>;
 }
