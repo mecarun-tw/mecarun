@@ -1,16 +1,27 @@
 <div class="product-container" *ngIf="(product$ | async) as product">
 
   <div class="product-header">
-    <span class="product-title">{{product?.name}}</span>
+    <span class="product-title">{{product.name}}</span>
     <span class="spacer"></span>
-    <span class="product-price">{{product?.price}}</span>
+    <span class="product-price">{{product.price}}</span>
   </div>
 
   <div class="product-info-container">
 
     <div class="product-left-container">
 
-      <img [src]="product?.imageUrl">
+      <img [src]="product.imageUrl">
+
+      <div class="external-links-container">
+
+        <app-external-link-button
+          *ngFor="let link of product.externalLinks"
+          [externalUrl]="link.externalUrl"
+          [imageUrl]="link.imageUrl"
+          [size]="'64px'"
+        ></app-external-link-button>
+
+      </div>
     </div>
   
     <div class="product-right-container" [innerHTML]="product?.description"></div>

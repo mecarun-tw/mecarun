@@ -40,6 +40,14 @@
         max-width: 352px;
         max-height: 352px;
       }
+
+      .external-links-container {
+        margin: 8px;
+
+        app-external-link-button {
+          margin: 4px;
+        }
+      }
     }
   
     .product-right-container {

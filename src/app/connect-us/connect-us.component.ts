@@ -10,8 +10,9 @@ export class ConnectUsComponent implements OnInit {
 
   externalLinks: ExternalLink[] = [
     { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
-    { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw'},
-    { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw'},
+    { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/store/danili51100/'},
+    { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/queen_japan'},
+    { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/'},
   ];
 
   constructor() { }

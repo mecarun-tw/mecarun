@@ -107,6 +107,12 @@ export class Api implements ApiInterface {
               原產地：法國           
             `,
             imageUrl: 'assets/images/products/P18.png',
+            externalLinks: [
+              { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
+              { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
+              { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203?position=1'},
+              { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
+            ]
           }
         ], [
           'en',{
@@ -115,6 +121,7 @@ export class Api implements ApiInterface {
             price: '123',
             description: 'description. description. description. description. description.',
             imageUrl: '',
+            externalLinks: []
           }
         ]
       ])
