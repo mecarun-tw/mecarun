@@ -33,8 +33,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscribeActivateLinkByUrlChange();
 
-    const c = collection(this.firestore, 'test');
-    console.log(c.id)
+    // const c = collection(this.firestore, 'test');
+    // console.log(c.id)
   }
 
   ngOnDestroy(): void {
