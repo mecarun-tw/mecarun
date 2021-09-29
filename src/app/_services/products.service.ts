@@ -26,7 +26,7 @@ export class ProductsService {
   ) { }
 
   getProductKeys = (): Observable<ProductKey[]|null> => {
-    if (this.productKeys !== null) {
+    if (this.productKeys !== null) {  // if it is already stored locally
       return this.productKeys.productKeys$;
     } else {
       const productKeysLanguagePackage$ = this.api.readProductKeys();

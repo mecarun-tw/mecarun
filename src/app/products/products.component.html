@@ -3,4 +3,5 @@
     *ngFor="let productKey of (productKeys$ | async)"
     [productKey]="productKey">
   </app-product-card>
+  <div *ngIf="isOdd$ | async" class="odd-spacer"></div>
 </div>

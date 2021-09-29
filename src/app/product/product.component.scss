@@ -1,0 +1,38 @@
+.product-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .product-title {
+    width: calc(100% - 64px);
+    margin: 0 32px;
+    height: 80px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+  }
+
+  .product-info-container {
+    width: 100%;
+    display: flex;
+    flex: 1 1 1px;
+
+    .product-left-container {
+      width: 384px;
+      height: 100%;
+
+      img {
+        width: 352px;
+        height: 352px;
+      }
+    }
+  
+    .product-right-container {
+      height: 100%;
+      flex: 1 1 1px;
+    }
+  }
+
+}

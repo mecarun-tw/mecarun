@@ -1,1 +1,17 @@
-<p>product works!</p>
+<div class="product-container">
+
+  <div class="product-title">
+    <span>{{(product$ | async)?.name}}</span>
+  </div>
+
+  <div class="product-info-container">
+
+    <div class="product-left-container">
+      <img [src]="(product$ | async)?.imageUrl">
+    </div>
+  
+    <div class="product-right-container">
+      {{(product$ | async)?.description}}
+    </div>
+  </div>
+</div>
