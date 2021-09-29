@@ -27,19 +27,43 @@ export class Api implements ApiInterface {
               降低發動機溫度
             `,
             thumbnailUrl: 'assets/images/products/P18_thumbnail.png'
-          },{
+          }, {
             uuid: 'PRODUCT_KEY_UUID_1',
-            name: '產品名稱',
-            price: '123',
-            shortDescription: '簡短描述。簡短描述。簡短描述。簡短描述。簡短描述。',
-            thumbnailUrl: ''
-          },{
+            name: 'C99汽油/柴油',
+            price: '160~780 NTD',
+            shortDescription: `
+              Méca-run C99汽油/柴油 是降低消耗和節約能源的標杆<br>
+              清潔°預防°潤滑°省油環保°可提升馬力
+            `,
+            thumbnailUrl: 'assets/images/products/C99_thumbnail.png'
+          }, {
             uuid: 'PRODUCT_KEY_UUID_2',
-            name: '產品名稱',
-            price: '123',
-            shortDescription: '簡短描述。簡短描述。簡短描述。簡短描述。簡短描述。',
-            thumbnailUrl: ''
-          }
+            name: 'C99 Racing',
+            price: '950 NTD',
+            shortDescription: `
+              Mecarun C99 Racing，添加劑使您的火焰前沿速度超過 600m/秒，以通過爆燃而不是爆轟來提供燃料的全部功率<br>
+              照護引擎，也強化
+            `,
+            thumbnailUrl: 'assets/images/products/C99_racing_thumbnail.png'
+          }, {
+            uuid: 'PRODUCT_KEY_UUID_3',
+            name: 'C99 Winner',
+            price: '980 NTD',
+            shortDescription: `
+              專為高水平設計，它是我們為比賽製造的最強大的添加劑，請注意尋求刺激的人！<br>
+              如果 C99 Racing 允許更好的駕駛（扭矩、靈活性、動力），那麼 C99 Winner 是為尋求動力和速度以及頂級飛行員而保留的！<br>
+            `,
+            thumbnailUrl: 'assets/images/products/C99_winner_thumbnail.png'
+          }, {
+            uuid: 'PRODUCT_KEY_UUID_4',
+            name: 'ECO 10.000',
+            price: '170~850 NTD',
+            shortDescription: `
+              ECO 10000清潔EGR積碳/清潔DPF
+              清潔EGR積碳/柴油碳粒過濾器(DPF)清洗劑
+            `,
+            thumbnailUrl: 'assets/images/products/ECO10000_thumbnail.png'
+          },
         ]
       ], [
         'en',
@@ -110,7 +134,7 @@ export class Api implements ApiInterface {
             externalLinks: [
               { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
               { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
-              { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203?position=1'},
+              { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203'},
               { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
             ]
           }
@@ -125,7 +149,189 @@ export class Api implements ApiInterface {
           }
         ]
       ])
-    }
+    }, {
+      uuid: 'PRODUCT_KEY_UUID_1',
+      languages: new Map([[
+          'zh',{
+            uuid: 'PRODUCT_KEY_UUID_1',
+            name: 'C99汽油/柴油',
+            price: '160~780 NTD',
+            description: `
+              使用 C99 ，發動機更安靜<br>
+              隨時保持噴油嘴通暢,汽油燃燒更完全（省油-10%）<br>
+              C99  減少二氧化碳排放和燃料消耗<br>
+              使用 C99  ，您可以減少電解對的有害影響<br>
+              C99阻斷了燃料中的渦電流，現在的車，燃料在管路內流動的速度非常快，這會產生靜電與渦電流，在燃料品質不佳時，這些電子雜訊，的確會影響ECU...<br>
+              C99 的抗摩擦功能<br>
+              C99去除水垢（碳）段，冠狀活塞，閥門，燃燒室，進氣管道和EGR。 延長壽命並保護催化轉化器。 最大限度地減少新發動機在最佳狀態下的結垢。<br>
+              該產品的主要功能是燃燒汽油並減少污染（請參閱經過認證的測試台上的分析）。 減摩和不粘功能將為噴射泵以及直至火區提供保護。 <br>
+              這個怎麼運作 ： C99修改燃料分子（碳鏈類型C6）的表面張力，以獲得燃燒/燃料混合物的均勻分佈，從而實現更好的燃燒，從而改變熱機的運行參數。 C 99在任何溫度下（冷熱均可）提高空氣/燃料混合物的速度，氣體混合物更均勻，在點火時刻燃燒速度超快，所有燃料產生能量，您的錢不不再有煙塵和污染。 發現：抗污染技術控制裝置顯示出的Hc和Co穩定減少了4倍。 結果令人難以置信，但這就是事實。 乾淨的引擎消耗少得多： •滿載時可再續航100公里* •節省EGR，FAP或Turbo的更換成本！ •將Euro 3車輛上的發動機污染*減少50％以上。 •抑菌作用（抗菌）。 •抗污染：Co，Co²，Hc，Nox，濁度法（黑煙）。 •EGR閥，微粒過濾器，渦輪。 •電機經過分層處理，以減少發動機堵塞。 <br>
+              Méca-run C99是降低消耗和節約能源的標杆。<br>
+                92, 95, 98 或 95e10、柴油<br>
+              增加扭矩和功率、競爭、電路，<br>
+              您的發動機將配得上一級方程式賽車。<br>
+              每瓶250毫升足供處理1000公升燃油<br>
+              40 升 20 毫升 - 60 升 30 毫升 - 80 升 40 毫升<br>
+              產地：法國<br>     
+            `,
+            imageUrl: 'assets/images/products/C99.png',
+            externalLinks: [
+              { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
+              { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22125304134175'},
+              { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5792877790'},
+              { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415246.htm'},
+            ]
+          }
+        ], [
+          'en',{
+            uuid: 'PRODUCT_KEY_UUID_1',
+            name: 'Product Name',
+            price: '123',
+            description: 'description. description. description. description. description.',
+            imageUrl: '',
+            externalLinks: []
+          }
+        ]
+      ])
+    }, {
+      uuid: 'PRODUCT_KEY_UUID_2',
+      languages: new Map([[
+          'zh',{
+            uuid: 'PRODUCT_KEY_UUID_2',
+            name: 'C99 Racing',
+            price: '950 NTD',
+            description: `
+              C99 Racing推出的專業賽車汽油，就是世界級最專業的賽車汽油濃縮液！大幅增大引擎馬力<br>
+              適用於各種，跑車、摩托車，使用汽油引擎之設備。<br>
+              目前台灣並沒有販售適用於高壓縮比引擎的賽車汽油。若您使用高壓縮比的引擎，加油站所售一般標號98,95,92汽油並不適用；<br>
+              Mecarun C99 Racing推出的專業賽車汽油，就是世界級最專業的賽車汽油濃縮液！<br>
+              Mecarun C99 Racing可避免引擎內的不正常燃燒，防止爆震；提升燃油效率，同時有效降低引擎溫度，讓您親身體驗專業賽車燃料的動力與流暢！亦可搭配Mecarun P18 金屬處理劑，讓您愛車進化100%！<br>
+              C 99 Racing 用於汽車和摩托車，壓縮率高達 13（這是一級方程式賽車的壓縮率）。<br>
+              Mecarun C99 Racing，添加劑使您的火焰前沿速度超過 600m/秒，以通過爆燃而不是爆轟來提供燃料的全部功率<br>
+              照護引擎，也強化<br>
+              在競技場上，引擎不斷運轉，需要高單位的辛烷值來提升抗爆性，增加燃燒室的潤滑，降低機件間的摩擦力；<br>
+              Mecarun C99 Racing 的作用即是完全潤滑，改善燃燒室條件，防護引擎的同時,讓燃燒效率提升,大幅增大引擎馬力，讓駕駛的我們時實質感受來自引擎的能量。<br>
+              防止引擎爆震，有效保護引擎<br>
+              。不損傷車輛氧濃度傳感器與觸媒轉化器<br>
+              。充分釋放引擎馬力，提升燃燒效能。<br>
+              。有效降低引擎溫度，防止燃油過早氣化<br>
+              。極致提昇引擎動力輸出 與加速表現<br>
+              。極致改善油耗提升每公升汽油可行駛里程<br>
+              。可依照不同需求，以不同比例來混和<br>
+              10 升汽油98,95,92使用 20 毫升Mecarun C99 Racing<br>
+              <br>
+              容量：250ML<br>
+              產地：法國<br>           
+            `,
+            imageUrl: 'assets/images/products/C99_racing.png',
+            externalLinks: [
+              { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
+              { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22128716636532'},
+              { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/Mecarun-C99-Racing推出的專業賽車汽油辛烷值濃，就是世界級最專業的賽車汽油濃縮液！-i.1403035.8490191326'},
+              { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415258.htm'},
+            ]
+          }
+        ], [
+          'en',{
+            uuid: 'PRODUCT_KEY_UUID_2',
+            name: 'Product Name',
+            price: '123',
+            description: 'description. description. description. description. description.',
+            imageUrl: '',
+            externalLinks: []
+          }
+        ]
+      ])
+    }, {
+      uuid: 'PRODUCT_KEY_UUID_3',
+      languages: new Map([[
+          'zh',{
+            uuid: 'PRODUCT_KEY_UUID_3',
+            name: 'C99 Winner',
+            price: '980 NTD',
+            description: `
+              法國Mecarun C99 Winner 推出的專業賽車汽油，就是世界級最專業的賽車汽油濃縮液！大幅增大引擎馬力<br>
+              適用於各種，跑車、摩托車，使用汽油引擎之設備。<br>
+              <br>
+              目前台灣並沒有販售適用於高壓縮比引擎的賽車汽油。若您使用高壓縮比的引擎，加油站所售一般標號98汽油並不適用<br>
+              <br>
+              Mecarun C99 Winner 推出的專業賽車汽油，就是世界級最專業的賽車汽油濃縮液！<br>
+              <br>
+              MecarunC99 Winner專業賽車汽油辛烷值濃，可避免引擎內的不正常燃燒，防止爆震；提升燃油效率，同時有效降低引擎溫度，讓您親身體驗專業賽車燃料的動力與流暢！亦可搭配Mecarun P18 金屬處理劑，讓您愛車進化100%！<br>
+              <br>
+              C99 Winner  用於汽車和摩托車，壓縮率高達 13（這是一級方程式賽車的壓縮率）。<br>
+              <br>
+              照護引擎，也強化<br>
+              <br>
+              在競技場上，引擎不斷運轉，需要高單位的辛烷值來提升抗爆性，增加燃燒室的潤滑，降低機件間的摩擦力；可依照不同需求，以不同比例來混和。<br>
+              <br>
+              10 升汽油98使用 5 至 15 毫升Mecarun C99 Winner<br>
+              <br>
+              我們建議從 10 毫升C99 Winner 開始加入 10 升汽油98，然後每 5 毫升增加 5 毫升，但不超過 15 毫升。<br>
+              <br>
+              容量：250ML<br>
+              <br>
+              產地：法國<br>
+            `,
+            imageUrl: 'assets/images/products/C99_winner.png',
+            externalLinks: [
+              { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
+              { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22133560240446'},
+              { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/法國Mecarun-C99-Winner-推出的專業賽車汽油，就是世界級最專業的賽車汽油濃縮液！-i.1403035.11034654876'},
+            ]
+          }
+        ], [
+          'en',{
+            uuid: 'PRODUCT_KEY_UUID_2',
+            name: 'Product Name',
+            price: '123',
+            description: 'description. description. description. description. description.',
+            imageUrl: '',
+            externalLinks: []
+          }
+        ]
+      ])
+    }, {
+      uuid: 'PRODUCT_KEY_UUID_4',
+      languages: new Map([[
+          'zh',{
+            uuid: 'PRODUCT_KEY_UUID_4',
+            name: 'ECO 10.000',
+            price: '170~850 NTD',
+            description: `
+              EGR:在排氣系統裡，廢氣再循環（Exhaust Gas Recirculation）簡稱EGR，也有人稱之為廢氣回收閥。<br>
+              EGR積碳:由於是導入廢氣循環，所以當廢氣裡的積碳或油泥造成 EGR 閥關閉不良，該關閉的時候沒關起來，或是作動的真空膜片破損漏氣。當車子在怠速時，那麼怠速階段導入了廢氣燃燒就會造成車子怠速不穩，會抖呀抖的，或者是行駛時車子踩油門加速無力、甚至引入廢氣過多造成熄火，引擎故障燈亮起等等情況。<br>
+              <br>
+              1 - 取一個清潔包，由一瓶 250 毫升的 Eco 10,000 和一瓶 250 毫升的 C 99 組成，可處理 1,000 升柴油。<br>
+              2 - 在路上卸載 EGR 閥：將 Eco 10,000 250 ml 倒入裝有 25 升柴油 + 5 ml C 99 的半滿油箱中。汽油車在 2000 和 2,500 之間始終以所有檔位行駛 (柴油車在 3000 和 4000)（低速和停車除外） 在此加油期間每分鐘轉數不超過最後一個檔位，同時消耗這 25 升經過清潔處理的柴油。<br>
+              3.行駛約50至100公里以清除所有溶解的污染物。<br>
+              4.用雙倍劑量的 C 99 製作接下來的 3 次餡料。<br>
+              5. 本產品適用於所有類型的顆粒過濾器，也可以使用再生液（PSA®技術）的顆粒過濾器外。<br>
+              6. - 汽車：每 10,000 公里，25 升燃油 250 毫升 + 5 ml c99，然後用 c99 處理以下餡料。<br>
+              - 重型貨車：每 30,000 公里 2.5 升換 500 升柴油。<br>
+              - 摩托車：每年一次 10 升汽油 50 毫升。<br>
+              原產地：法國<br>
+              容量：250ml,100ml,50ml
+            `,
+            imageUrl: 'assets/images/products/ECO10000.png',
+            externalLinks: [
+              { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
+              { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22133561250617'},
+              { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415235.htm'},
+            ]
+          }
+        ], [
+          'en',{
+            uuid: 'PRODUCT_KEY_UUID_2',
+            name: 'Product Name',
+            price: '123',
+            description: 'description. description. description. description. description.',
+            imageUrl: '',
+            externalLinks: []
+          }
+        ]
+      ])
+    },
   ]);
 
   readProductKeys = () => {
