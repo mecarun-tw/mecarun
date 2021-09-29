@@ -18,6 +18,11 @@
     justify-content: center;
     align-items: center;
     background-color: global.$backgroud-color-light;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 
   .text-container {
@@ -28,6 +33,7 @@
     .product-name {
       margin-bottom: 8px;
       font-size: 24px;
+      font-weight: 700;
     }
 
     .product-short-description {

@@ -1,7 +1,7 @@
 export interface ProductKey {
   uuid: string;
   name: string;
-  price: number;
+  price: string;
   shortDescription: string;
   thumbnailUrl: string;
 }
@@ -9,9 +9,7 @@ export interface ProductKey {
 export interface Product {
   uuid: string;
   name: string;
-  price: number;
-  shortDescription: string;
+  price: string;
   description: string;
   imageUrl: string;
-  thumbnailUrl: string;
 }

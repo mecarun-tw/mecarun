@@ -1,17 +1,18 @@
-<div class="product-container">
+<div class="product-container" *ngIf="(product$ | async) as product">
 
-  <div class="product-title">
-    <span>{{(product$ | async)?.name}}</span>
+  <div class="product-header">
+    <span class="product-title">{{product?.name}}</span>
+    <span class="spacer"></span>
+    <span class="product-price">{{product?.price}}</span>
   </div>
 
   <div class="product-info-container">
 
     <div class="product-left-container">
-      <img [src]="(product$ | async)?.imageUrl">
+
+      <img [src]="product?.imageUrl">
     </div>
   
-    <div class="product-right-container">
-      {{(product$ | async)?.description}}
-    </div>
+    <div class="product-right-container" [innerHTML]="product?.description"></div>
   </div>
 </div>

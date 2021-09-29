@@ -1,17 +1,26 @@
+@use '/src/app/_styles/global';
+
 .product-container {
   display: flex;
   flex-direction: column;
   height: 100%;
 
-  .product-title {
+  .product-header {
     width: calc(100% - 64px);
     margin: 0 32px;
     height: 80px;
     display: flex;
-    justify-content: left;
     align-items: center;
-    font-size: 48px;
-    font-weight: 700;
+
+    .product-title {
+      font-size: 48px;
+      font-weight: 700;
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: 700;
+    }
   }
 
   .product-info-container {
@@ -20,17 +29,21 @@
     flex: 1 1 1px;
 
     .product-left-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
       width: 384px;
       height: 100%;
 
       img {
-        width: 352px;
-        height: 352px;
+        max-width: 352px;
+        max-height: 352px;
       }
     }
   
     .product-right-container {
-      height: 100%;
+      margin: 16px;
       flex: 1 1 1px;
     }
   }
