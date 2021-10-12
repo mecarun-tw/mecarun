@@ -8,7 +8,13 @@
 }
 
 .text-container {
-  margin: 0 128px;
+  margin: 32px 128px;
   border-left: 3px solid global.$theme-color-dark;
   font-size: 24px;
+
+  img {
+    height: 256px;
+    width: 256px;
+    margin-left: 64px;
+  }
 }

@@ -21,6 +21,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+
     this.activatedRoute.paramMap.pipe(
       map(paramMap => paramMap.get('uuid')),
       filter(uuid => !!uuid),

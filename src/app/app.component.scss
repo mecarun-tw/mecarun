@@ -14,6 +14,7 @@
     .main-container-header{
       position: fixed;
       top: 0px;
+      z-index: 1;
       background-color: global.$backgroud-color-light;
 
       .main-menu{
