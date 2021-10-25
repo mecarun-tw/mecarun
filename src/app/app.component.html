@@ -2,7 +2,9 @@
 
   <div class="main-container-header">
 
-    <img class="banner" src="assets/images/banner.png">
+    <img class="website-icon" src="assets/images/website-icon.png">
+
+    <img class="banner" [src]="bannerSrc$ | async">
 
     <mat-toolbar class="main-menu">
 

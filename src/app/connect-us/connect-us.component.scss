@@ -1,20 +1,25 @@
 @use '/src/app/_styles/global';
 
-.external-links-container {
-  display: flex;
-  justify-content: center;
-  margin: 32px;
-  gap: 64px;
-}
+.connect-us-container {
+  background-color: global.$backgroud-color-light;
+  padding: 32px;
 
-.text-container {
-  margin: 32px 128px;
-  border-left: 3px solid global.$theme-color-dark;
-  font-size: 24px;
-
-  img {
-    height: 256px;
-    width: 256px;
-    margin-left: 64px;
+  .external-links-container {
+    display: flex;
+    justify-content: center;
+    margin: 32px;
+    gap: 64px;
+  }
+  
+  .text-container {
+    margin: 32px 128px;
+    border-left: 3px solid global.$theme-color-dark;
+    font-size: 24px;
+  
+    img {
+      height: 256px;
+      width: 256px;
+      margin-left: 64px;
+    }
   }
 }

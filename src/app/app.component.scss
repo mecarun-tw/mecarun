@@ -3,23 +3,41 @@
 :host {
   display: flex;
   justify-content: center;
+  background-image: url('/assets/images/background.png');
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
 
   .main-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     width: 1187px;
-    background-color: global.$backgroud-color-light;
+    background-color: global.$theme-color-dark-light;
+    opacity: 0.9;
 
     .main-container-header{
+      width: 1187px;
       position: fixed;
       top: 0px;
       z-index: 1;
       background-color: global.$backgroud-color-light;
+      border-radius: 4px;
+
+      .website-icon {
+        margin: 0 16px;
+        width: 360px
+      }
+
+      .banner {
+        width: 1187px;
+        height: 192px;
+      }
 
       .main-menu{
         height: 64px;
         background-color: global.$theme-color-dark;
+        border-radius: 4px;
   
         .menu-button {
           height: 100%;
@@ -33,7 +51,7 @@
         }
   
         .activate-menu-button {
-          border-bottom: 3px solid global.$theme-color-red;
+          border-bottom: 5px solid global.$theme-color-red;
         }
       }
     }
@@ -42,7 +60,7 @@
       width: 100%;
       flex: 1 1 1px;
       padding-top: 16px;
-      margin-top: 303px;
+      margin-top: 320px;
     }
   }
 }
