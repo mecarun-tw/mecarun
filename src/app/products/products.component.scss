@@ -1,10 +1,15 @@
+.banner {
+  width: 1187px;
+  height: 192px;
+}
+
 .product-card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 16px;
-}
-
-.odd-spacer {
-  width: 512px;
+  
+  .odd-spacer {
+    width: 512px;
+  }
 }

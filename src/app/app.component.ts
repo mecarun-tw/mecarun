@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Firestore, collection } from '@angular/fire/firestore';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Subject, timer } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { MenuLink } from 'src/app/_interfaces/menu-link.interface';
 
@@ -20,13 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
     { display: 'MAIN_MENU.PRODUCTS', url: 'products' },
     { display: 'MAIN_MENU.CONNECT_US', url: 'connect-us' },
   ];
-  bannerSrc$ = new BehaviorSubject<string>('assets/images/banners/banner_0.png');
-  bannerSrcs = [
-    'assets/images/banners/banner_0.png',
-    'assets/images/banners/banner_1.png',
-    'assets/images/banners/banner_2.png',
-    'assets/images/banners/banner_3.png',
-  ]
 
   constructor(
     private router: Router,
@@ -39,12 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translateService.use('zh');
 
     this.subscribeActivateLinkByUrlChange();
-
-    timer(10000, 10000).pipe(
-      takeUntil(this.destroy$),
-      map(n => n % 4),
-      map(n => this.bannerSrcs[n])
-    ).subscribe(this.bannerSrc$);
   }
 
   ngOnDestroy(): void {

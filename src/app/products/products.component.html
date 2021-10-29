@@ -1,3 +1,5 @@
+<img class="banner" [src]="bannerSrc$ | async">
+
 <div class="product-card-container">
   <app-product-card
     *ngFor="let productKey of (productKeys$ | async)"
