@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   activateLink$ = new BehaviorSubject<string>('products');
   menuLinks: MenuLink[] = [
     { display: 'MAIN_MENU.PRODUCTS', url: 'products' },
+    { display: 'MAIN_MENU.POINTS_OF_SALE', url: 'points-of-sale' },
     { display: 'MAIN_MENU.CONNECT_US', url: 'connect-us' },
   ];
 

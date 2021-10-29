@@ -14,6 +14,7 @@ import { ProductsComponent } from './products/products.component';
 import { ExternalLinkButtonComponent } from './_elements/buttons/external-link-button/external-link-button.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ProductComponent } from './product/product.component';
+import { PointsOfSaleComponent } from './points-of-sale/points-of-sale.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProductComponent } from './product/product.component';
     ProductsComponent,
     ExternalLinkButtonComponent,
     ProductCardComponent,
-    ProductComponent
+    ProductComponent,
+    PointsOfSaleComponent
   ],
   imports: [
     BrowserModule,
