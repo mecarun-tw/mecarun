@@ -18,7 +18,6 @@
 
     .main-container-header{
       width: 1187px;
-      position: fixed;
       top: 0px;
       z-index: 1;
       background-color: global.$backgroud-color-light;
@@ -55,7 +54,6 @@
       width: 100%;
       flex: 1 1 1px;
       padding-top: 16px;
-      margin-top: 128px;
     }
   }
 }
