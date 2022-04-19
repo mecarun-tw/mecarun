@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { Product, ProductKey } from '../_interfaces/product.interface';
+import { ProductKey } from '../_interfaces/product.interface';
 import { ProductsService } from '../_services/products.service';
 
 @Component({

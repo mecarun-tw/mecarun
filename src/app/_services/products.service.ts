@@ -1,85 +1,88 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { distinctUntilChanged, map, startWith, switchAll } from 'rxjs/operators';
 import { Api } from 'src/app/_api/mock.api';
 import { Product, ProductKey } from 'src/app/_interfaces/product.interface';
-import { LanguagePackage } from 'src/app/_interfaces/language-package.interface';
-
-interface ProductsStorage extends LanguagePackage<ProductKey[]> {
-  productKeys$: BehaviorSubject<ProductKey[]|null>
-}
-interface ProductStorage extends LanguagePackage<Product> {
-  product$: BehaviorSubject<Product|null>;
-}
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private productKeys: ProductsStorage|null = null;
-  private products = new Map<string, ProductStorage>();
+  private productKeysStorage: ProductKey[] = [];
+  private productsStorage = new Map<string, Product>(); // key: uuid_language
+  public productKeys$ = new BehaviorSubject<ProductKey[]|null>(null);
+  public products = new Map<string, BehaviorSubject<Product|null>>(); // key: uuid
+  private currentLanguage$: Observable<string> = this.translateService.onLangChange.pipe(
+    map(e => e.lang),
+    startWith(this.translateService.currentLang),
+    distinctUntilChanged()
+  );
 
   constructor(
     private api: Api,
     private translateService: TranslateService
   ) { }
 
-  getProductKeys = (): Observable<ProductKey[]|null> => {
-    if (this.productKeys !== null) {  // if it is already stored locally
-      return this.productKeys.productKeys$;
-    } else {
-      const productKeysLanguagePackage$ = this.api.readProductKeys();
-      const productKeys$ = new BehaviorSubject<ProductKey[]|null>(null);
-
-      productKeysLanguagePackage$.subscribe(productKeysLanguagePackage => {
-        this.productKeys = Object.assign({
-          productKeys$
-        }, productKeysLanguagePackage);
-      });
-
-      combineLatest([ // update if backend data or language change
-        productKeysLanguagePackage$,
-        this.translateService.onLangChange.pipe(map(e => e.lang), startWith(this.translateService.currentLang), distinctUntilChanged())
-      ]).pipe(
-        map(([productKeysLanguagePackage, language]) => {
-          return productKeysLanguagePackage?.languages.get(language)
+  getProductKeys = (forceUpdate?: boolean): BehaviorSubject<ProductKey[]|null> => {
+    if (this.productKeys$.value === null) { // init
+      this.currentLanguage$.pipe(
+        map(currentLanguage => {
+          const productKeys = this.productKeysStorage.filter(productKey => productKey.language === currentLanguage);
+          if (productKeys.length > 0) { // in storage
+            return of(productKeys);
+          } else { // not in storage
+            return from(this.api.readProductKeys(currentLanguage).then(response => {
+              this.productKeysStorage = this.productKeysStorage.filter(productKey => productKey.language !== currentLanguage).concat(response);
+              return response;
+            }));
+          }
         }),
-        map(productKeys => (productKeys ? productKeys : null) as ProductKey[]|null),
-      ).subscribe(productKeys$);
-
-      return productKeys$;
+        switchAll() // flattened
+      ).subscribe(this.productKeys$);
     }
+    if (forceUpdate) {
+      const currentLanguage = this.translateService.currentLang;
+      this.api.readProductKeys(currentLanguage).then(response => {
+        this.productKeysStorage = this.productKeysStorage.filter(productKey => productKey.language !== currentLanguage).concat(response);
+        this.productKeys$.next(response);
+      });
+    }
+    return this.productKeys$;
   }
 
-  getProduct = (uuid: string): BehaviorSubject<Product|null> => {
-    if (this.products.has(uuid)) {  // if it is already stored locally
-      return this.products.get(uuid)?.product$ as BehaviorSubject<Product|null>;
-    } else {
-      const productLanguagePackage$ = this.api.readProduct(uuid); // call backend
+  getProduct = (uuid: string, forceUpdate?: boolean): BehaviorSubject<Product|null> => {
+    if (!this.products.has(uuid)) { // init
       const product$ = new BehaviorSubject<Product|null>(null);
-
-      productLanguagePackage$.subscribe(productLanguagePackage => {
-        this.products.set(
-          uuid, {
-            uuid: productLanguagePackage?.uuid,
-            languages: productLanguagePackage?.languages,
-            product$
-          } as ProductStorage
-        );
-      });
-
-      combineLatest([ // update if backend data or language change
-        productLanguagePackage$,
-        this.translateService.onLangChange.pipe(map(e => e.lang), startWith(this.translateService.currentLang), distinctUntilChanged())
-      ]).pipe(
-        map(([productLanguagePackage, language]) => {
-          return productLanguagePackage?.languages.get(language)
+      this.products.set(uuid, product$);
+      this.currentLanguage$.pipe(
+        map(currentLanguage => {
+          const productsStorageKey = this.generateProductsStorageKey(uuid, currentLanguage);
+          if (this.productsStorage.has(productsStorageKey)) { //in storage
+            return of(this.productsStorage.get(productsStorageKey) as Product);
+          } else { // not in storage
+            return from(this.api.readProduct(uuid, currentLanguage).then(response => {
+              this.productsStorage.set(productsStorageKey, response);
+              return response;
+            }));
+          }
         }),
-        map(product => (product ? product : null) as Product|null),
+        switchAll()
       ).subscribe(product$);
-
-      return product$;
     }
+    if (forceUpdate) {
+      const currentLanguage = this.translateService.currentLang;
+      this.api.readProduct(uuid, currentLanguage).then(response => {
+        const productsStorageKey = this.generateProductsStorageKey(uuid, currentLanguage);
+        this.productsStorage.delete(productsStorageKey);
+        this.productsStorage.set(productsStorageKey, response);
+        this.products.get(uuid)?.next(response);
+      });
+    }
+    return this.products.get(uuid) as BehaviorSubject<Product|null>;
+  }
+
+  private generateProductsStorageKey = (uuid: string, language: string): string => {
+    return [uuid, language].join('_');
   }
 }

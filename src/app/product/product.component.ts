@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { filter, first, map, takeUntil } from 'rxjs/operators';
 import { Product } from '../_interfaces/product.interface';
 import { ProductsService } from '../_services/products.service';
 
@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       map(paramMap => paramMap.get('uuid')),
       filter(uuid => !!uuid),
       map(uuid => uuid as string),
-      takeUntil(this.destroy$)
+      first()
     ).subscribe(uuid => {
       this.productsService.getProduct(uuid).pipe(takeUntil(this.destroy$)).subscribe(this.product$);
     });

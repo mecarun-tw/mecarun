@@ -2,6 +2,7 @@ import { ExternalLink } from "./external-link.interface";
 
 export interface ProductKey {
   uuid: string;
+  language: string;
   name: string;
   price: string;
   shortDescription: string;
@@ -10,6 +11,7 @@ export interface ProductKey {
 
 export interface Product {
   uuid: string;
+  language: string;
   name: string;
   price: string;
   description: string;
