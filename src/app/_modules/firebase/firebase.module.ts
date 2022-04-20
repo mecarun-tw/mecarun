@@ -17,11 +17,6 @@ import { enableIndexedDbPersistence, FirestoreModule, getFirestore, provideFires
       return firestore;
     }),
     provideStorage(() => getStorage()),
-  ],
-  exports: [
-    // FirebaseAppModule,
-    // FirestoreModule,
-    // StorageModule
   ]
 })
 export class FirebaseModule { }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchAll } from 'rxjs/operators';
-import { Api } from 'src/app/_api/mock.api';
+import { Api } from 'src/app/_api/firebase.api';
+// import { Api } from 'src/app/_api/mock.api';
 import { Product, ProductKey } from 'src/app/_interfaces/product.interface';
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,6 @@ export class ProductsService {
   private productsStorage = new Map<string, Product>(); // key: uuid_language
   public productKeys$ = new BehaviorSubject<ProductKey[]|null>(null);
   public products = new Map<string, BehaviorSubject<Product|null>>(); // key: uuid
-  private currentLanguage$: Observable<string> = this.translateService.onLangChange.pipe(
-    map(e => e.lang),
-    startWith(this.translateService.currentLang),
-    distinctUntilChanged()
-  );
 
   constructor(
     private api: Api,
@@ -26,7 +22,11 @@ export class ProductsService {
 
   getProductKeys = (forceUpdate?: boolean): BehaviorSubject<ProductKey[]|null> => {
     if (this.productKeys$.value === null) { // init
-      this.currentLanguage$.pipe(
+      this.translateService.onLangChange.pipe(
+        map(e => e.lang),
+        startWith(this.translateService.currentLang),
+        distinctUntilChanged()
+      ).pipe(
         map(currentLanguage => {
           const productKeys = this.productKeysStorage.filter(productKey => productKey.language === currentLanguage);
           if (productKeys.length > 0) { // in storage
@@ -55,7 +55,11 @@ export class ProductsService {
     if (!this.products.has(uuid)) { // init
       const product$ = new BehaviorSubject<Product|null>(null);
       this.products.set(uuid, product$);
-      this.currentLanguage$.pipe(
+      this.translateService.onLangChange.pipe(
+        map(e => e.lang),
+        startWith(this.translateService.currentLang),
+        distinctUntilChanged()
+      ).pipe(
         map(currentLanguage => {
           const productsStorageKey = this.generateProductsStorageKey(uuid, currentLanguage);
           if (this.productsStorage.has(productsStorageKey)) { //in storage
