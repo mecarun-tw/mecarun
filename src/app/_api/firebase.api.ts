@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { collection, collectionData, doc, Firestore, query, where, docData, getDoc, getDocs } from "@angular/fire/firestore";
-import { first } from "rxjs/operators";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Product, ProductKey } from "../_interfaces/product.interface";
 import { ApiInterface } from "./api.interface";
 
@@ -10,23 +9,20 @@ import { ApiInterface } from "./api.interface";
 export class Api implements ApiInterface {
 
   constructor (
-    private firestore: Firestore
+    private firestore: AngularFirestore
   ) {}
 
   readProductKeys = (language: string) => {
-    return collectionData(query(
-      collection(this.firestore, 'productKeys'),
-      where('language', '==', language)
-    )).pipe(first()).toPromise() as Promise<ProductKey[]>;
+    return this.firestore.collection<ProductKey>(
+      'productKeys',
+      document => document.where('language', '==', language)
+    ).get().toPromise().then(query => query.docs.map(doc => doc.data()));
   };
 
   readProduct = (uuid: string, language: string) => {
-    return collectionData(query(
-      collection(this.firestore, 'products'),
-      where('uuid', '==', uuid),
-      where('language', '==', language)
-    )).pipe(first()).toPromise().then(documents => {
-      return documents[0] as Product;
-    });
+    return this.firestore.collection<Product>(
+      'products',
+      document => document.where('uuid', '==', uuid).where('language', '==', language)
+    ).get().toPromise().then(query => query.docs.map(doc => doc.data())[0]);
   };
 }

@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Firestore, collection } from '@angular/fire/firestore';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -24,8 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private translateService: TranslateService,
-    private firestore: Firestore
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
