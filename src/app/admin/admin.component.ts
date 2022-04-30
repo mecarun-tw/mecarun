@@ -6,19 +6,17 @@ import { filter, map, takeUntil } from 'rxjs/operators';
 import { MenuLink } from 'src/app/_interfaces/menu-link.interface';
 
 @Component({
-  selector: 'app-public',
-  templateUrl: './public.component.html',
-  styleUrls: ['./public.component.scss']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss']
 })
-export class PublicComponent implements OnInit, OnDestroy {
+export class AdminComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject<void>();
   
   activateLink$ = new BehaviorSubject<string>('products');
   menuLinks: MenuLink[] = [
-    { display: 'PUBLIC.MAIN_MENU.PRODUCTS', url: 'products' },
-    { display: 'PUBLIC.MAIN_MENU.POINTS_OF_SALE', url: 'points-of-sale' },
-    { display: 'PUBLIC.MAIN_MENU.CONNECT_US', url: 'connect-us' },
+    { display: 'ADMIN.MAIN_MENU.PRODUCT_MANAGEMENT', url: 'products' }
   ];
 
   constructor(

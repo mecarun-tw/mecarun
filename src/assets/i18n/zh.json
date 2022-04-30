@@ -1,9 +1,16 @@
 {
   "HELLO_MESSAGE": "{{name}}，你好！",
   "LANGUAGE_BUTTON": "English",
-  "MAIN_MENU": {
-    "PRODUCTS": "產品列表",
-    "POINTS_OF_SALE": "銷售站點",
-    "CONNECT_US": "連絡我們"
+  "PUBLIC": {
+    "MAIN_MENU": {
+      "PRODUCTS": "產品列表",
+      "POINTS_OF_SALE": "銷售站點",
+      "CONNECT_US": "連絡我們"
+    }
+  },
+  "ADMIN": {
+    "MAIN_MENU": {
+      "PRODUCT_MANAGEMENT": "產品管理"
+    }
   }
 }

@@ -1,9 +1,16 @@
 {
   "HELLO_MESSAGE": "Hello {{name}}!",
   "LANGUAGE_BUTTON": "中文",
-  "MAIN_MENU": {
-    "PRODUCTS": "Products",
-    "POINTS_OF_SALE": "Points of sale",
-    "CONNECT_US": "Connect us"
+  "PUBLIC": {
+    "MAIN_MENU": {
+      "PRODUCTS": "Products",
+      "POINTS_OF_SALE": "Points of sale",
+      "CONNECT_US": "Connect us"
+    }
+  },
+  "ADMIN": {
+    "MAIN_MENU": {
+      "PRODUCT_MANAGEMENT": "Product Management"
+    }
   }
 }
