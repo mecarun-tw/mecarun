@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExternalLink } from '../_interfaces/external-link.interface';
+import { ExternalLink } from 'src/app/_interfaces/external-link.interface';
 
 @Component({
   selector: 'app-connect-us',

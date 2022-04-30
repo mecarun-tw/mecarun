@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, first, map, takeUntil } from 'rxjs/operators';
-import { Product } from '../_interfaces/product.interface';
-import { ProductsService } from '../_services/products.service';
+import { Product } from 'src/app/_interfaces/product.interface';
+import { ProductsService } from 'src/app/_services/products.service';
 
 @Component({
   selector: 'app-product',

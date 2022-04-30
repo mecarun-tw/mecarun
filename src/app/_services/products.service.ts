@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { BehaviorSubject, from, of } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchAll } from 'rxjs/operators';
 import { Api } from 'src/app/_api/firebase.api';
 // import { Api } from 'src/app/_api/mock.api';
 import { Product, ProductKey } from 'src/app/_interfaces/product.interface';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class ProductsService {
 
