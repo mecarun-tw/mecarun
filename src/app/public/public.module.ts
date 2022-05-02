@@ -5,6 +5,7 @@ import { PublicRoutingModule } from './public-routing.module';
 
 import { AngularMaterialModule } from 'src/app/_modules/angular-material/angular-material.module';
 import { NgxTranslateModule } from 'src/app/_modules/ngx-translate/ngx-translate.module';
+import { SharedModule } from 'src/app/_modules/shared/shared.module';
 
 import { ExternalLinkButtonComponent } from 'src/app/_elements/buttons/external-link-button/external-link-button.component';
 
@@ -31,6 +32,7 @@ import { PointsOfSaleComponent } from './points-of-sale/points-of-sale.component
     PublicRoutingModule,
     AngularMaterialModule,
     NgxTranslateModule,
+    SharedModule,
   ]
 })
 export class PublicModule { }

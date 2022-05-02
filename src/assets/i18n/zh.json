@@ -1,6 +1,8 @@
 {
   "HELLO_MESSAGE": "{{name}}，你好！",
   "LANGUAGE_BUTTON": "English",
+  "SVAE_BUTTON": "儲存",
+  "CANCEL_BUTTON": "取消",
   "PUBLIC": {
     "MAIN_MENU": {
       "PRODUCTS": "產品列表",
@@ -11,6 +13,18 @@
   "ADMIN": {
     "MAIN_MENU": {
       "PRODUCT_MANAGEMENT": "產品管理"
+    },
+    "PRODUCT_EDITOR": {
+      "TITLE": "產品編輯器",
+      "INPUT_LABEL": {
+        "NAME": "名稱",
+        "LANGUAGE": "語言",
+        "PRICE": "價格",
+        "SHORT_DESCRIPTION": "簡介",
+        "DESCRIPTION": "介紹",
+        "THUMBNAIL_URL": "縮圖",
+        "IMAGE_URL": "圖片"
+      }
     }
   }
 }

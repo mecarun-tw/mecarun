@@ -1,6 +1,8 @@
 {
   "HELLO_MESSAGE": "Hello {{name}}!",
   "LANGUAGE_BUTTON": "中文",
+  "SVAE_BUTTON": "Save",
+  "CANCEL_BUTTON": "Cancel",
   "PUBLIC": {
     "MAIN_MENU": {
       "PRODUCTS": "Products",
@@ -11,6 +13,18 @@
   "ADMIN": {
     "MAIN_MENU": {
       "PRODUCT_MANAGEMENT": "Product Management"
+    },
+    "PRODUCT_EDITOR": {
+      "TITLE": "Product Editor",
+      "INPUT_LABEL": {
+        "NAME": "Name",
+        "LANGUAGE": "Language",
+        "PRICE": "Price",
+        "SHORT_DESCRIPTION": "Short Description",
+        "DESCRIPTION": "Description",
+        "THUMBNAIL_URL": "Thumbnail",
+        "IMAGE_URL": "Image"
+      }
     }
   }
 }

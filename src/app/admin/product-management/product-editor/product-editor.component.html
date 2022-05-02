@@ -1,0 +1,49 @@
+<div [formGroup]="productFormGroup" class="product-editor-container">
+
+  <div class="title-bar">
+    <h1>{{'ADMIN.PRODUCT_EDITOR.TITLE' | translate}}</h1>
+    <span class="spacer"></span>
+    <button mat-stroked-button (click)="cancel()">{{'CANCEL_BUTTON' | translate}}</button>
+    <button mat-stroked-button (click)="submit()">{{'SVAE_BUTTON' | translate}}</button>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.NAME' | translate}}</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.LANGUAGE' | translate}}</mat-label>
+    <mat-select formControlName="language">
+      <mat-option *ngFor="let language of languages" [value]="language.code">
+        {{language.display}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.PRICE' | translate}}</mat-label>
+    <input matInput formControlName="price">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.SHORT_DESCRIPTION' | translate}}</mat-label>
+    <input matInput formControlName="shortDescription">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.DESCRIPTION' | translate}}</mat-label>
+    <input matInput formControlName="description">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.THUMBNAIL_URL' | translate}}</mat-label>
+    <input matInput formControlName="thumbnailUrl">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.IMAGE_URL' | translate}}</mat-label>
+    <input matInput formControlName="imageUrl">
+  </mat-form-field>
+
+</div>

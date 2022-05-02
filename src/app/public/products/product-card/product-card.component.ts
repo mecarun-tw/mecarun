@@ -18,7 +18,7 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void { }
 
   gotoProduct = (): void => {
-    this.router.navigate(['public', 'product', this.productKey.uuid]);
+    this.router.navigate(['public', 'product', this.productKey.productId]);
   }
 
 }

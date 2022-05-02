@@ -1,0 +1,27 @@
+@use '/src/app/_styles/global';
+
+.product-editor-container {
+  height: 100%;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  background-color: global.$backgroud-color-light;
+
+  .title-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    button {
+      height: 32px;
+      margin-right: 16px;
+      background-color: global.$backgroud-color;
+    }
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+    background-color: global.$backgroud-color;
+  }
+}

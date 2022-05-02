@@ -1,0 +1,21 @@
+@use '/src/app/_styles/global';
+
+.main-menu{
+  height: 64px;
+  background-color: global.$theme-color-dark;
+  border-radius: 4px;
+
+  .menu-button {
+    height: 100%;
+    padding: 0;
+    margin: 0 8px;
+    border-radius: 0;
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .activate-menu-button {
+    border-bottom: 5px solid global.$theme-color-red;
+  }
+}

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, startWith, switchAll, takeUntil } from 'rxjs/operators';
 import { ProductKey } from 'src/app/_interfaces/product.interface';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -24,11 +25,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ]
 
   constructor(
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
-    this.productsService.getProductKeys().pipe(takeUntil(this.destroy$)).subscribe(this.productKeys$);
+    this.translateService.onLangChange.pipe(
+      map(e => e.lang),
+      startWith(this.translateService.currentLang),
+      distinctUntilChanged()
+    ).pipe(
+      takeUntil(this.destroy$),
+      map(language => this.productsService.getProductKeys(language)),
+      switchAll()
+    ).subscribe(productKeys => this.productKeys$.next(productKeys));
 
     this.isOdd$ = this.productKeys$.pipe(
       filter(productKeys => !!productKeys),
@@ -44,6 +54,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.productKeys$.complete();
     this.destroy$.next();
     this.destroy$.complete();
   }

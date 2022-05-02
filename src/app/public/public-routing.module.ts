@@ -12,7 +12,7 @@ const routes: Routes = [{
   component: PublicComponent,
   children: [
     { path: 'products', component: ProductsComponent },
-    { path: 'product/:uuid', component: ProductComponent },
+    { path: 'product/:productId', component: ProductComponent },
     { path: 'product', redirectTo: 'products' },
     { path: 'connect-us', component: ConnectUsComponent },
     { path: 'points-of-sale', component: PointsOfSaleComponent },

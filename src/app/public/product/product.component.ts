@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { filter, first, map, takeUntil } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, first, map, startWith, switchAll, takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/_interfaces/product.interface';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -17,23 +18,32 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
 
-    this.activatedRoute.paramMap.pipe(
-      map(paramMap => paramMap.get('uuid')),
-      filter(uuid => !!uuid),
-      map(uuid => uuid as string),
-      first()
-    ).subscribe(uuid => {
-      this.productsService.getProduct(uuid).pipe(takeUntil(this.destroy$)).subscribe(this.product$);
-    });
+    combineLatest([
+      this.activatedRoute.paramMap.pipe(
+        map(paramMap => paramMap.get('productId')),
+        map(productId => productId as string)
+      ),
+      this.translateService.onLangChange.pipe(
+        map(e => e.lang),
+        startWith(this.translateService.currentLang),
+        distinctUntilChanged()
+      )
+    ]).pipe(
+      takeUntil(this.destroy$),
+      map(([productId, language]) => this.productsService.getProduct(productId, language)),
+      switchAll(),
+    ).subscribe(product => this.product$.next(product));
   }
 
   ngOnDestroy(): void {
+    this.product$.complete();
     this.destroy$.next();
     this.destroy$.complete();
   }

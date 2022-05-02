@@ -4,27 +4,7 @@
 
     <img class="website-icon" src="assets/images/website-icon.png">
 
-    <mat-toolbar class="main-menu">
-
-      <button
-        mat-button
-        class="menu-button"
-        *ngFor="let link of menuLinks"
-        (click)="goto(link)"
-        [class.activate-menu-button]="link.url === (activateLink$ | async)">
-        {{ link.display | translate }}
-      </button>
-
-      <span class="spacer"></span>
-
-      <button
-        mat-button
-        class="menu-button"
-        (click)="toggleLanguage()">
-        {{ 'LANGUAGE_BUTTON' | translate }}
-      </button>
-
-    </mat-toolbar>
+    <app-main-toolbar [menuLinks]="menuLinks"></app-main-toolbar>
 
   </div>
 
