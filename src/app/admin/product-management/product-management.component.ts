@@ -42,8 +42,12 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  gotoProduct = (uuid: string): void => {
+  editProduct = (uuid: string): void => {
     this.router.navigate(['admin', 'product-editor', uuid]);
+  }
+
+  deleteProduct = (uuid: string): void => {
+    this.productsService.deleteProduct(uuid);
   }
 
   createProduct = () => {

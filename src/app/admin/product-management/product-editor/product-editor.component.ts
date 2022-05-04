@@ -93,9 +93,14 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
         externalLinks: []
       } as Product;
 
-      if (this.uuid) {
+      if (this.uuid && this.productId) {
+        product.uuid = this.uuid;
+        product.productId = this.productId;
+        this.productsService.updateProduct(product).then(() => {
+          this.router.navigate(['admin', 'product-management']);
+        });
       } else { //create
-        this.productsService.createProduct(product).then(product$ => {
+        this.productsService.createProduct(product).then(() => {
           this.router.navigate(['admin', 'product-management']);
         });
       }

@@ -3,8 +3,8 @@
     <mat-list-item *ngFor="let productKey of productKeys">
       {{productKey.name}}
       <span class="spacer"></span>
-      <button mat-icon-button (click)="gotoProduct(productKey.uuid)"><mat-icon>edit</mat-icon></button>
-      <button mat-icon-button><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button (click)="editProduct(productKey.uuid)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="deleteProduct(productKey.uuid)"><mat-icon>delete</mat-icon></button>
     </mat-list-item>
    </mat-list>
   

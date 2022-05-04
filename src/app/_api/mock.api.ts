@@ -61,12 +61,7 @@ export class Api implements ApiInterface {
   ];
 
   private products: Product[] = [
-    {
-      uuid: '80dc13d7-6feb-5f48-8bb3-98adc19e7c7c',
-      productId: '56b53378-d5d5-43fa-bf2d-1a32899897f7',
-      language: 'zh',
-      name: 'P18 金屬處理劑',
-      price: '250~1100 NTD',
+    Object.assign({
       description: `
         什麼是P 18？<br>
         P 18不是傳統技術上的潤滑油添加劑（不是極壓潤滑劑）<br>
@@ -98,25 +93,14 @@ export class Api implements ApiInterface {
         原產地：法國           
       `,
       imageUrl: 'assets/images/products/P18.png',
-      shortDescription: `
-        *.保護金屬機件，提升壽命<br>
-        *.增強金屬表面強韌度<br>
-        用於發動機、車軸、減速器和增速器的表面。<br>
-        降低發動機溫度
-      `,
-      thumbnailUrl: 'assets/images/products/P18_thumbnail.png',
       externalLinks: [
         { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
         { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
         { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203'},
         { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
       ]
-    }, {
-      uuid: '9f1cb967-2ce4-5005-bc10-37ff40d1b640',
-      productId: '6e685ccc-0513-4c7e-88f0-f34fd4c92733',
-      language: 'zh',
-      name: 'C99汽油/柴油',
-      price: '160~780 NTD',
+    }, this.productKeys[0]),
+    Object.assign({
       description: `
         使用 C99 ，發動機更安靜<br>
         隨時保持噴油嘴通暢,汽油燃燒更完全（省油-10%）<br>
@@ -136,25 +120,14 @@ export class Api implements ApiInterface {
         產地：法國<br>     
       `,
       imageUrl: 'assets/images/products/C99.png',
-      shortDescription: `
-        *.保護金屬機件，提升壽命<br>
-        *.增強金屬表面強韌度<br>
-        用於發動機、車軸、減速器和增速器的表面。<br>
-        降低發動機溫度
-      `,
-      thumbnailUrl: 'assets/images/products/P18_thumbnail.png',
       externalLinks: [
         { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
         { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22125304134175'},
         { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5792877790'},
         { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415246.htm'},
       ]
-    }, {
-      uuid: 'f137a583-f7a2-5c7b-9272-27a2cc3cc361',
-      productId: 'c52d59be-8c1d-4e97-a331-d45f58c4f967',
-      language: 'zh',
-      name: 'C99 Racing',
-      price: '950 NTD',
+    }, this.productKeys[1]),
+    Object.assign({
       description: `
         C99 Racing推出的專業賽車汽油，就是世界級最專業的賽車汽油濃縮液！大幅增大引擎馬力<br>
         適用於各種，跑車、摩托車，使用汽油引擎之設備。<br>
@@ -179,25 +152,14 @@ export class Api implements ApiInterface {
         產地：法國<br>           
       `,
       imageUrl: 'assets/images/products/C99_racing.png',
-      shortDescription: `
-        *.保護金屬機件，提升壽命<br>
-        *.增強金屬表面強韌度<br>
-        用於發動機、車軸、減速器和增速器的表面。<br>
-        降低發動機溫度
-      `,
-      thumbnailUrl: 'assets/images/products/P18_thumbnail.png',
       externalLinks: [
         { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
         { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22128716636532'},
         { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/Mecarun-C99-Racing推出的專業賽車汽油辛烷值濃，就是世界級最專業的賽車汽油濃縮液！-i.1403035.8490191326'},
         { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415258.htm'},
       ]
-    }, {
-      uuid: '04cbc95d-a1e8-5eaa-a3b9-1067e8efe197',
-      productId: '56b53378-d5d5-43fa-bf2d-1a32899897f7',
-      language: 'en',
-      name: 'P18 metal treatment agent',
-      price: '8~35 USD',
+    }, this.productKeys[2]),
+    Object.assign({
       description: `
         What is P18? <br>
         P 18 is not a lubricant additive in conventional technology (not an extreme pressure lubricant)<br>
@@ -229,20 +191,13 @@ export class Api implements ApiInterface {
         Origin: France
       `,
       imageUrl: 'assets/images/products/P18.png',
-      shortDescription: `
-        *.保護金屬機件，提升壽命<br>
-        *.增強金屬表面強韌度<br>
-        用於發動機、車軸、減速器和增速器的表面。<br>
-        降低發動機溫度
-      `,
-      thumbnailUrl: 'assets/images/products/P18_thumbnail.png',
       externalLinks: [
         { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
         { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
         { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203'},
         { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
       ]
-    }
+    }, this.productKeys[3])
   ];
 
   readProductKeys = (language: string) => {
@@ -261,9 +216,24 @@ export class Api implements ApiInterface {
   updateProductKey = (productKey: ProductKey) => {
     console.log('api updateProductKey');
     const index = this.productKeys.findIndex(productKeyElement => productKeyElement.uuid === productKey.uuid);
-    this.productKeys.splice(index, 1);
-    this.productKeys.push(productKey);
-    return Promise.resolve({...productKey} as ProductKey);
+    if (index === -1) {
+      return Promise.reject('NOT_EXIST');
+    } else {
+      this.productKeys.splice(index, 1);
+      this.productKeys.push(productKey);
+      return Promise.resolve({...productKey} as ProductKey);
+    }
+  };
+
+  deleteProductKey = (uuid: string) => {
+    console.log('api deleteProductKey');
+    const index = this.productKeys.findIndex(productKeyElement => productKeyElement.uuid === uuid);
+    if (index === -1) {
+      return Promise.reject('NOT_EXIST');
+    } else {
+      this.productKeys.splice(index, 1);
+      return Promise.resolve();
+    }
   };
 
   readProduct = (uuid: string) => {
@@ -285,8 +255,23 @@ export class Api implements ApiInterface {
   updateProduct = (product: Product) => {
     console.log('api updateProduct');
     const index = this.products.findIndex(productElement => productElement.uuid === product.uuid && productElement.language === product.language);
-    this.products.splice(index, 1);
-    this.products.push(product);
-    return Promise.resolve({...product} as Product);
+    if (index === -1) {
+      return Promise.reject('NOT_EXIST');
+    } else {
+      this.products.splice(index, 1);
+      this.products.push(product);
+      return Promise.resolve({...product} as Product);
+    }
+  };
+
+  deleteProduct = (uuid: string) => {
+    console.log('api deleteProduct');
+    const index = this.products.findIndex(productElement => productElement.uuid === uuid);
+    if (index === -1) {
+      return Promise.reject('NOT_EXIST');
+    } else {
+      this.products.splice(index, 1);
+      return Promise.resolve();
+    }
   };
 } 
