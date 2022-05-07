@@ -26,15 +26,30 @@
     <input matInput formControlName="price">
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.SHORT_DESCRIPTION' | translate}}</mat-label>
     <input matInput formControlName="shortDescription">
-  </mat-form-field>
+  </mat-form-field> -->
 
-  <mat-form-field appearance="fill">
+  <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.SHORT_DESCRIPTION' | translate}}</h4>
+  <quill-editor
+    class="quill-editor"
+    [placeholder]="'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.SHORT_DESCRIPTION' | translate"
+    formControlName="shortDescription"
+    [modules]="quillEditorModols">
+  </quill-editor>
+
+  <!-- <mat-form-field appearance="fill">
     <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.DESCRIPTION' | translate}}</mat-label>
     <input matInput formControlName="description">
-  </mat-form-field>
+  </mat-form-field> -->
+  <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.DESCRIPTION' | translate}}</h4>
+  <quill-editor
+    class="quill-editor"
+    [placeholder]="'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.DESCRIPTION' | translate"
+    formControlName="description"
+    [modules]="quillEditorModols">
+  </quill-editor>
 
   <mat-form-field appearance="fill">
     <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.THUMBNAIL_URL' | translate}}</mat-label>

@@ -20,6 +20,24 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
   languages = environment.languages;
   destroy$ = new Subject<void>();
 
+  quillEditorModols = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+  
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+  
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'align': [] }],
+  
+      ['clean'],                                         // remove formatting button
+    ]
+  }
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private productsService: ProductsService,

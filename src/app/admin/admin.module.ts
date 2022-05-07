@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { QuillModule } from 'ngx-quill';
 
 import { AngularMaterialModule } from 'src/app/_modules/angular-material/angular-material.module';
 import { SharedModule } from 'src/app/_modules/shared/shared.module';
@@ -24,6 +25,7 @@ import { ProductEditorComponent } from './product-management/product-editor/prod
     AngularMaterialModule,
     NgxTranslateModule,
     SharedModule,
+    QuillModule.forRoot()
   ]
 })
 export class AdminModule { }
