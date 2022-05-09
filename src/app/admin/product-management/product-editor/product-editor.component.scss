@@ -3,6 +3,7 @@
 .product-editor-container {
   height: 100%;
   padding: 0 32px;
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
   background-color: global.$backgroud-color-light;
@@ -25,7 +26,20 @@
     background-color: global.$backgroud-color;
   }
 
+  .field-title-bar {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-left: 16px;
+    }
+  }
+
   .quill-editor {
     margin-bottom: 45px;
+  }
+
+  .file-upload-input {
+    display: none;
   }
 }

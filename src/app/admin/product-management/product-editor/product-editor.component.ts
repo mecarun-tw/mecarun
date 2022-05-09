@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
@@ -13,6 +13,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./product-editor.component.scss']
 })
 export class ProductEditorComponent implements OnInit, OnDestroy {
+
+  @ViewChild('thumbnail') thumbnailElement!: ElementRef;
+  @ViewChild('image') imageElement!: ElementRef;
 
   uuid: string|null = null;
   productId: string|null = null;
@@ -42,7 +45,8 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private productsService: ProductsService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private renderer2: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -122,6 +126,51 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
           this.router.navigate(['admin', 'product-management']);
         });
       }
+    }
+  }
+
+  onFileChange = (e: any, type: string) => {
+    
+    const file: File = e.target.files[0];
+    
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.addEventListener('load', fileReaderEvent => {
+
+        const image = new Image();
+        image.addEventListener('load', () => {
+
+          const maxWidth = type === 'thumbnail' ? environment.IMAGE_SIZE.THUMBNAIL_MAX_WIDTH : environment.IMAGE_SIZE.IMAGE_MAX_WIDTH;
+          const maxHeight = type === 'thumbnail' ? environment.IMAGE_SIZE.THUMBNAIL_MAX_HEIGHT : environment.IMAGE_SIZE.IMAGE_MAX_HEIGHT;
+          let width = image.width;
+          let height = image.height;
+          if (width > maxWidth) {
+            height = Math.floor(height * maxWidth / width);
+            width = maxWidth;
+          }
+          if (height > maxHeight) {
+            width = Math.floor(width * maxHeight / height);
+            height = maxHeight;
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const context = canvas.getContext('2d');
+
+          context?.drawImage(image, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL();
+
+          const element = type === 'thumbnail' ? this.thumbnailElement : this.imageElement;
+          this.renderer2.setStyle(element.nativeElement, 'width', width + 'px');
+          this.renderer2.setStyle(element.nativeElement, 'height', height + 'px');
+          element.nativeElement.src = dataUrl;
+        });
+
+        image.src = fileReaderEvent.target?.result as string;
+      });
+
+      fileReader.readAsDataURL(file);
     }
   }
 

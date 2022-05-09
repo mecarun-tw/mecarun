@@ -26,11 +26,6 @@
     <input matInput formControlName="price">
   </mat-form-field>
 
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.SHORT_DESCRIPTION' | translate}}</mat-label>
-    <input matInput formControlName="shortDescription">
-  </mat-form-field> -->
-
   <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.SHORT_DESCRIPTION' | translate}}</h4>
   <quill-editor
     class="quill-editor"
@@ -39,10 +34,6 @@
     [modules]="quillEditorModols">
   </quill-editor>
 
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.DESCRIPTION' | translate}}</mat-label>
-    <input matInput formControlName="description">
-  </mat-form-field> -->
   <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.DESCRIPTION' | translate}}</h4>
   <quill-editor
     class="quill-editor"
@@ -51,14 +42,18 @@
     [modules]="quillEditorModols">
   </quill-editor>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.THUMBNAIL_URL' | translate}}</mat-label>
-    <input matInput formControlName="thumbnailUrl">
-  </mat-form-field>
+  <div class="field-title-bar">
+    <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.THUMBNAIL_URL' | translate}}</h4>
+    <button mat-icon-button (click)="thumbnailInput.click()"><mat-icon>upload</mat-icon></button>
+  </div>
+  <input type="file" class="file-upload-input" #thumbnailInput (change)="onFileChange($event, 'thumbnail')">
+  <img #thumbnail class="thumbnail">
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.IMAGE_URL' | translate}}</mat-label>
-    <input matInput formControlName="imageUrl">
-  </mat-form-field>
-
+  <div class="field-title-bar">
+    <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.IMAGE_URL' | translate}}</h4>
+    <button mat-icon-button (click)="imageInput.click()"><mat-icon>upload</mat-icon></button>
+  </div>
+  <input type="file" class="file-upload-input" #imageInput (change)="onFileChange($event, 'image')">
+  <img #image class="image">
+  
 </div>
