@@ -10,7 +10,7 @@
 
     <div class="product-left-container">
 
-      <img [src]="product.imageUrl">
+      <img [src]="getImageUrl(product.productImageUuid) | async">
 
       <div class="external-links-container">
 

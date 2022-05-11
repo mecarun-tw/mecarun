@@ -46,14 +46,14 @@
     <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.THUMBNAIL_URL' | translate}}</h4>
     <button mat-icon-button (click)="thumbnailInput.click()"><mat-icon>upload</mat-icon></button>
   </div>
-  <input type="file" class="file-upload-input" #thumbnailInput (change)="onFileChange($event, 'thumbnail')">
-  <img #thumbnail class="thumbnail">
+  <input type="file" class="file-upload-input" #thumbnailInput (change)="onFileChange($event, 'thumbnailUuid')">
+  <img #thumbnail>
 
   <div class="field-title-bar">
     <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.IMAGE_URL' | translate}}</h4>
     <button mat-icon-button (click)="imageInput.click()"><mat-icon>upload</mat-icon></button>
   </div>
-  <input type="file" class="file-upload-input" #imageInput (change)="onFileChange($event, 'image')">
-  <img #image class="image">
+  <input type="file" class="file-upload-input" #imageInput (change)="onFileChange($event, 'productImageUuid')">
+  <img #image>
   
 </div>

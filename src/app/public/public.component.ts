@@ -14,11 +14,11 @@ export class PublicComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject<void>();
   
-  activateLink$ = new BehaviorSubject<string>('products');
+  activateLink$ = new BehaviorSubject<string>('public/products');
   menuLinks: MenuLink[] = [
-    { display: 'PUBLIC.MAIN_MENU.PRODUCTS', url: 'products' },
-    { display: 'PUBLIC.MAIN_MENU.POINTS_OF_SALE', url: 'points-of-sale' },
-    { display: 'PUBLIC.MAIN_MENU.CONNECT_US', url: 'connect-us' },
+    { display: 'PUBLIC.MAIN_MENU.PRODUCTS', url: 'public/products' },
+    { display: 'PUBLIC.MAIN_MENU.POINTS_OF_SALE', url: 'public/points-of-sale' },
+    { display: 'PUBLIC.MAIN_MENU.CONNECT_US', url: 'public/connect-us' },
   ];
 
   constructor(
@@ -36,10 +36,6 @@ export class PublicComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  goto = (link: MenuLink): void => {
-    this.router.navigate(['public', link.url]);
   }
 
   toggleLanguage = () => {

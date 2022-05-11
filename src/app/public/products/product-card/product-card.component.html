@@ -1,7 +1,7 @@
 <div class="product-card-container" (click)="gotoProduct()">
 
   <div class="image-container">
-    <img [src]="productKey.thumbnailUrl">
+    <img [src]="getImageUrl(productKey.thumbnailUuid) | async">
   </div>
 
   <div class="text-container">

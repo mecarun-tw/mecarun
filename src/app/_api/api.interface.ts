@@ -11,4 +11,8 @@ export interface ApiInterface {
   createProduct: (product: Product) => Promise<Product>;
   updateProduct: (product: Product) => Promise<Product>;
   deleteProduct: (uuid: string) => Promise<void>;
+
+  getImageUrl: (uuid: string) => Promise<string>;
+  uploadImage: (dataUrl: string) => Promise<string>;
+  deleteImage: (uuid: string) => Promise<void>;
 }

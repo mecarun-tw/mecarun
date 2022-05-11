@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, first, map, startWith, switchAll, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, map, startWith, switchAll, takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/_interfaces/product.interface';
+import { ImagesService } from 'src/app/_services/images.service';
 import { ProductsService } from 'src/app/_services/products.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productsService: ProductsService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private imagesService: ImagesService
   ) { }
 
   ngOnInit(): void {
@@ -48,4 +50,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  getImageUrl = (imageUuid: string) => {
+    return this.imagesService.getImageUrl(imageUuid);
+  }
 }

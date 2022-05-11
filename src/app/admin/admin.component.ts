@@ -14,9 +14,9 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject<void>();
   
-  activateLink$ = new BehaviorSubject<string>('products');
+  activateLink$ = new BehaviorSubject<string>('product-management');
   menuLinks: MenuLink[] = [
-    { display: 'ADMIN.MAIN_MENU.PRODUCT_MANAGEMENT', url: 'products' }
+    { display: 'ADMIN.MAIN_MENU.PRODUCT_MANAGEMENT', url: 'admin/product-management' }
   ];
 
   constructor(
@@ -34,10 +34,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  goto = (link: MenuLink): void => {
-    this.router.navigate(['public', link.url]);
   }
 
   toggleLanguage = () => {

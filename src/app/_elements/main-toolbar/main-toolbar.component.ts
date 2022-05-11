@@ -16,7 +16,7 @@ export class MainToolbarComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject<void>();
   
-  activateLink$ = new BehaviorSubject<string>('products');
+  activateLink$ = new BehaviorSubject<string>('');
 
   constructor(
     private router: Router,
@@ -26,6 +26,7 @@ export class MainToolbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.translateService.use('zh');
+    this.activateLink$.next(this.menuLinks[0].url);
 
     this.subscribeActivateLinkByUrlChange();
   }
@@ -36,7 +37,7 @@ export class MainToolbarComponent implements OnInit, OnDestroy {
   }
 
   goto = (link: MenuLink): void => {
-    this.router.navigate(['public', link.url]);
+    this.router.navigate([link.url]);
   }
 
   toggleLanguage = () => {
@@ -63,5 +64,4 @@ export class MainToolbarComponent implements OnInit, OnDestroy {
       });
     });
   }
-
 }

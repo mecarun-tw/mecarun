@@ -9,12 +9,12 @@ export interface ProductKey {
   name: string;
   price: string;
   shortDescription: string;
-  thumbnailUrl: string;
+  thumbnailUuid: string;
 }
 
 export interface Product extends ProductKey {
   description: string;
-  imageUrl: string;
+  productImageUuid: string;
   externalLinks: ExternalLink[];
 }
 
