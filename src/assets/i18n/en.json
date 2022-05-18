@@ -24,6 +24,12 @@
         "DESCRIPTION": "Description",
         "THUMBNAIL_URL": "Thumbnail",
         "IMAGE_URL": "Image"
+      },
+      "ERROR_MESSAGE": {
+        "SHORT_DESCRIPTION": "Short Description is required.",
+        "DESCRIPTION": "Description is required.",
+        "THUMBNAIL_URL": "Thumbnail is required.",
+        "IMAGE_URL": "Image is required."
       }
     }
   }

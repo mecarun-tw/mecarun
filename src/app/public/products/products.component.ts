@@ -12,7 +12,7 @@ import { ProductsService } from 'src/app/_services/products.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  productKeys$ = new BehaviorSubject<ProductKey[]|null>([]);
+  productKeys$ = new BehaviorSubject<ProductKey[]|null|undefined>([]);
   isOdd$!: Observable<boolean>;
   destroy$ = new Subject<void>();
 

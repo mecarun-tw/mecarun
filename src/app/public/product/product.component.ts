@@ -14,7 +14,7 @@ import { ProductsService } from 'src/app/_services/products.service';
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
-  product$ = new BehaviorSubject<Product|null>(null);
+  product$ = new BehaviorSubject<Product|null|undefined>(null);
   destroy$ = new Subject<void>();
 
   constructor(

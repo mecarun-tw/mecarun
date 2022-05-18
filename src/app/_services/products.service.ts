@@ -9,33 +9,49 @@ import { Product, ProductKey, getProductUuid } from 'src/app/_interfaces/product
 })
 export class ProductsService {
 
-  private productKeysets = new Map<string, BehaviorSubject<ProductKey[]|null>>(); // key: language
-  private products = new Map<string, BehaviorSubject<Product|null>>(); // key: uuid
+  private productKeysets = new Map<string, BehaviorSubject<ProductKey[]|null|undefined>>(); // key: language
+  private products = new Map<string, BehaviorSubject<Product|null|undefined>>(); // key: uuid
 
   constructor(
     private api: Api
   ) { }
 
-  getProductKeys = (language: string): BehaviorSubject<ProductKey[]|null> => {
+  getProductKeys = (language: string): BehaviorSubject<ProductKey[]|null|undefined> => {
     if (!this.productKeysets.has(language)) {
-      this.initProductKeys(language);
+      const productKeys$ = new BehaviorSubject<ProductKey[]|null|undefined>(null);
+      this.productKeysets.set(language, productKeys$);
+      this.api.readProductKeys(language).then(productKeysResponse => {
+        productKeys$.next(productKeysResponse);
+      }).catch(reason => {
+        if (reason === 'NOT_EXIST') {
+          productKeys$.next(undefined);
+        }
+      });
     }
-    return this.productKeysets.get(language) as BehaviorSubject<ProductKey[]|null>;
+    return this.productKeysets.get(language) as BehaviorSubject<ProductKey[]|null|undefined>;
   }
 
-  getProductByUuid = (uuid: string): BehaviorSubject<Product|null> => {
+  getProductByUuid = (uuid: string): BehaviorSubject<Product|null|undefined> => {
     if (!this.products.has(uuid)) { // init
-      this.initProduct(uuid);
+      const product$ = new BehaviorSubject<Product|null|undefined>(null);
+      this.products.set(uuid, product$);
+      this.api.readProduct(uuid).then(response => {
+        product$.next(response);
+      }).catch(reason => {
+        if (reason === 'NOT_EXIST') {
+          product$.next(undefined);
+        }
+      });
     }
-    return this.products.get(uuid) as BehaviorSubject<Product|null>;
+    return this.products.get(uuid) as BehaviorSubject<Product|null|undefined>;
   }
 
-  getProduct = (productId: string, language: string) => {
+  getProduct = (productId: string, language: string): BehaviorSubject<Product|null|undefined> => {
     const uuid = getProductUuid(productId, language);
     return this.getProductByUuid(uuid);
   }
 
-  createProduct = (product: Product) => {
+  createProduct = (product: Product): Promise<void> => {
     return this.api.createProductKey(product).then(productKeyResponse => {
       product.uuid = productKeyResponse.uuid;
       product.productId = productKeyResponse.productId;
@@ -43,11 +59,13 @@ export class ProductsService {
       productKeys$.next([...productKeys$.value, productKeyResponse]);
       return this.api.createProduct(product);
     }).then(productResponse => {
-      this.initProduct(productResponse.uuid, productResponse);
+      const product$ = new BehaviorSubject<Product|null|undefined>(null);
+      this.products.set(productResponse.uuid, product$);
+      product$.next(product);
     });
   }
 
-  updateProduct = (product: Product) => {
+  updateProduct = (product: Product): Promise<void> => {
     return this.api.updateProductKey(product).then(productKeyResponse => {
       const productKeys$ = this.getProductKeys(product.language) as BehaviorSubject<ProductKey[]>;
       const productKeys = productKeys$.value;
@@ -61,7 +79,7 @@ export class ProductsService {
     });
   }
 
-  deleteProduct = (uuid: string) => {
+  deleteProduct = (uuid: string): Promise<void> => {
     return this.api.deleteProductKey(uuid).then(() => {
       return this.getProductByUuid(uuid).pipe(
         filter(_product => !!_product),
@@ -79,25 +97,5 @@ export class ProductsService {
       this.products.get(uuid)?.complete();
       this.products.delete(uuid);
     });
-  }
-
-  private initProductKeys = (language: string) => {
-    const productKeys$ = new BehaviorSubject<ProductKey[]|null>(null);
-    this.productKeysets.set(language, productKeys$);
-    this.api.readProductKeys(language).then(productKeysResponse => {
-      productKeys$.next(productKeysResponse);
-    });
-  }
-
-  private initProduct = (uuid: string, product?: Product) => {
-    const product$ = new BehaviorSubject<Product|null>(null);
-    this.products.set(uuid, product$);
-    if (product) {
-      product$.next(product);
-    } else {
-      this.api.readProduct(uuid).then(response => {
-        product$.next(response);
-      });
-    }
   }
 }

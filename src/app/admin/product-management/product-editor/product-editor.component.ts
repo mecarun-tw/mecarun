@@ -1,5 +1,6 @@
+import { ThisReceiver } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { filter, first, map, switchAll } from 'rxjs/operators';
@@ -21,6 +22,10 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
   uuid: string|null = null;
   productId: string|null = null;
   productFormGroup!: FormGroup;
+  initImageUuid: {[key: string]: string|null} = {
+    'thumbnailUuid': null,
+    'productImageUuid': null,
+  }
   languages = environment.languages;
   destroy$ = new Subject<void>();
 
@@ -56,15 +61,15 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
       name: ['', Validators.required],
       language: ['', Validators.required],
       price: ['', Validators.required],
-      shortDescription: ['', Validators.required],
-      description: ['', Validators.required],
-      thumbnailUuid: ['', Validators.required],
-      productImageUuid: ['', Validators.required],
+      shortDescription: [''],
+      description: [''],
+      thumbnailUuid: [''],
+      productImageUuid: [''],
     });
-
   }
   
   ngAfterViewInit(): void {
+
     this.activatedRoute.paramMap.pipe(
       map(paramMap => paramMap.get('uuid')),
       first(),
@@ -83,6 +88,8 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
       if (product) {
         this.uuid = product.uuid;
         this.productId = product.productId;
+        this.initImageUuid['thumbnailUuid'] = product.thumbnailUuid;
+        this.initImageUuid['productImageUuid'] = product.productImageUuid;
   
         this.imagesService.getImageUrl(product.productImageUuid).pipe(
           filter(imageUrl => !!imageUrl),
@@ -104,7 +111,25 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
           description: product.description,
           thumbnailUuid: product.thumbnailUuid,
           productImageUuid: product.productImageUuid,
-        });
+        }, { emitEvent: false});
+      }
+    });
+
+    this.productFormGroup.get('language')?.valueChanges.subscribe(language => {
+      if (this.uuid && this.productId) { // create or edit
+        this.productsService.getProduct(this.productId, language).pipe(
+          filter(productResponse => productResponse !== null)
+        ).subscribe(productResponse => {
+          if (productResponse) {
+            this.router.navigate(['admin', 'product-editor', productResponse.uuid]);
+          } else { // undefined
+            this.uuid = null;
+            this.productFormGroup.reset();
+            this.productFormGroup.get('language')?.setValue(language);
+            this.resetImageElement('thumbnailUuid');
+            this.resetImageElement('productImageUuid');
+          }
+        })
       }
     });
   }
@@ -119,6 +144,11 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   submit = () => {
+    this.requiredValidator('shortDescription');
+    this.requiredValidator('description');
+    this.requiredValidator('thumbnailUuid');
+    this.requiredValidator('productImageUuid');
+
     if (this.productFormGroup.valid) {
       const product = {
         uuid: '',
@@ -134,42 +164,32 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
       } as Product;
 
       if (this.uuid && this.productId && this.productFormGroup.dirty) {
-        const promises: Promise<void>[] = [];
-
-        const thumbnailUuidControl = this.productFormGroup.get('thumbnailUuid');
-        if (thumbnailUuidControl?.dirty) {
-          promises.push(
-            this.imagesService.deleteImage(thumbnailUuidControl?.value),
-            this.imagesService.uploadImage(this.thumbnailElement.nativeElement.src).then(imageUuid => {
-              thumbnailUuidControl?.setValue(imageUuid);
-            })
-          );
-        }
-
-        const productImageUuidControl = this.productFormGroup.get('productImageUuid');
-        if (productImageUuidControl?.dirty) {
-          promises.push(
-            this.imagesService.deleteImage(productImageUuidControl?.value),
-            this.imagesService.uploadImage(this.productImageElement.nativeElement.src).then(imageUuid => {
-              productImageUuidControl?.setValue(imageUuid);
-            })
-          );
-        }
-
-        Promise.all(promises).then(() => {
+        Promise.all([
+          this.uploadImageByControlName('thumbnailUuid'),
+          this.uploadImageByControlName('productImageUuid')
+        ]).then(() => {
           product.uuid = this.uuid as string;
           product.productId = this.productId as string;
-          product.thumbnailUuid = thumbnailUuidControl?.value;
-          product.productImageUuid = productImageUuidControl?.value;
+          product.thumbnailUuid = this.productFormGroup.get('thumbnailUuid')?.value;
+          product.productImageUuid = this.productFormGroup.get('productImageUuid')?.value;
           this.productsService.updateProduct(product).then(() => {
             this.router.navigate(['admin', 'product-management']);
           });
         });
       } else { //create
-        this.productsService.createProduct(product).then(() => {
-          this.router.navigate(['admin', 'product-management']);
+        Promise.all([
+          this.uploadImageByControlName('thumbnailUuid'),
+          this.uploadImageByControlName('productImageUuid')
+        ]).then(() => {
+          product.thumbnailUuid = this.productFormGroup.get('thumbnailUuid')?.value;
+          product.productImageUuid = this.productFormGroup.get('productImageUuid')?.value;
+          this.productsService.createProduct(product).then(() => {
+            this.router.navigate(['admin', 'product-management']);
+          });
         });
       }
+    } else {
+      this.productFormGroup.markAllAsTouched(); this.productFormGroup.get('shortDescription')?.hasError('required')
     }
   }
 
@@ -185,15 +205,15 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
 
       fileReader.readAsDataURL(file);
       const formControl = this.productFormGroup.get(controlName);
+      formControl?.setValue('NEW_IMAGE_UUID');
       formControl?.markAsDirty();
     }
   }
 
-  setImageElement = (dataUrl: string, controlName: string) => {
+  private setImageElement = (dataUrl: string, controlName: string) => {
     const image = new Image();
     image.addEventListener('load', () => {
-      const maxWidth = controlName === 'thumbnailUuid' ? environment.IMAGE_SIZE.THUMBNAIL_MAX_WIDTH : environment.IMAGE_SIZE.IMAGE_MAX_WIDTH;
-      const maxHeight = controlName === 'thumbnailUuid' ? environment.IMAGE_SIZE.THUMBNAIL_MAX_HEIGHT : environment.IMAGE_SIZE.IMAGE_MAX_HEIGHT;
+      const [maxWidth, maxHeight] = this.getMaxSizeByControlName(controlName);
       let width = image.width;
       let height = image.height;
 
@@ -216,12 +236,64 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
         dataUrl = canvas.toDataURL();
       }
 
-      const element = controlName === 'thumbnailUuid' ? this.thumbnailElement : this.productImageElement;
-      this.renderer2.setStyle(element.nativeElement, 'width', width + 'px');
-      this.renderer2.setStyle(element.nativeElement, 'height', height + 'px');
-      element.nativeElement.src = dataUrl;
+      const element = this.getImageElementByControlName(controlName)
+      this.renderer2.setStyle(element, 'width', width + 'px');
+      this.renderer2.setStyle(element, 'height', height + 'px');
+      element.src = dataUrl;
     });
 
     image.src = dataUrl;
+  }
+
+  private resetImageElement = (controlName: string) => {
+    const element = this.getImageElementByControlName(controlName)
+    this.renderer2.setStyle(element, 'width', 0);
+    this.renderer2.setStyle(element, 'height', 0);
+    element.src = null;
+  }
+
+  private getImageElementByControlName = (controlName: string) => {
+    let element = null;
+    if (controlName === 'thumbnailUuid') {
+      element = this.thumbnailElement.nativeElement;
+    }
+    if (controlName === 'productImageUuid') {
+      element = this.productImageElement.nativeElement;
+    }
+    return element;
+  }
+
+  private getMaxSizeByControlName = (controlName: string) => {
+    let maxWidth = 0;
+    let maxHeight = 0;
+    if (controlName === 'thumbnailUuid') {
+      maxWidth = environment.IMAGE_SIZE.THUMBNAIL_MAX_WIDTH;
+      maxHeight = environment.IMAGE_SIZE.THUMBNAIL_MAX_HEIGHT;
+    }
+    if (controlName === 'productImageUuid') {
+      maxWidth = environment.IMAGE_SIZE.IMAGE_MAX_WIDTH;
+      maxHeight = environment.IMAGE_SIZE.IMAGE_MAX_HEIGHT;
+    }
+    return [maxWidth, maxHeight];
+  }
+
+  private uploadImageByControlName = (controlName: string): Promise<void>[] => {
+    const promises: Promise<void>[] = [];
+    const control = this.productFormGroup.get(controlName);
+    const element = this.getImageElementByControlName(controlName);
+    if (control?.dirty) {
+      if (this.initImageUuid[controlName]) {
+        promises.push(this.imagesService.deleteImage(this.initImageUuid[controlName] as string));
+      }
+      promises.push(this.imagesService.uploadImage(element.src).then(imageUuid => control?.setValue(imageUuid)));
+    }
+    return promises;
+  }
+
+  private requiredValidator = (controlName: string) => {
+    const control = this.productFormGroup.get(controlName);
+    if (!control?.value) {
+      control?.setErrors({required: true});
+    }
   }
 }

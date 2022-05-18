@@ -8,17 +8,17 @@
   </div>
 
   <mat-form-field appearance="fill">
-    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.NAME' | translate}}</mat-label>
-    <input matInput formControlName="name">
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
     <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.LANGUAGE' | translate}}</mat-label>
     <mat-select formControlName="language">
       <mat-option *ngFor="let language of languages" [value]="language.code">
         {{language.display}}
       </mat-option>
     </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.NAME' | translate}}</mat-label>
+    <input matInput formControlName="name">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -33,6 +33,9 @@
     formControlName="shortDescription"
     [modules]="quillEditorModols">
   </quill-editor>
+  <mat-error *ngIf="this.productFormGroup.get('shortDescription')?.hasError('required')">
+    {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.SHORT_DESCRIPTION' | translate}}
+  </mat-error>
 
   <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.DESCRIPTION' | translate}}</h4>
   <quill-editor
@@ -41,6 +44,9 @@
     formControlName="description"
     [modules]="quillEditorModols">
   </quill-editor>
+  <mat-error *ngIf="this.productFormGroup.get('description')?.hasError('required')">
+    {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.DESCRIPTION' | translate}}
+  </mat-error>
 
   <div class="field-title-bar">
     <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.THUMBNAIL_URL' | translate}}</h4>
@@ -48,6 +54,9 @@
   </div>
   <input type="file" class="file-upload-input" #thumbnailInput (change)="onFileChange($event, 'thumbnailUuid')">
   <img #thumbnail>
+  <mat-error *ngIf="this.productFormGroup.get('thumbnailUuid')?.hasError('required')">
+    {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.THUMBNAIL_URL' | translate}}
+  </mat-error>
 
   <div class="field-title-bar">
     <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.IMAGE_URL' | translate}}</h4>
@@ -55,5 +64,8 @@
   </div>
   <input type="file" class="file-upload-input" #imageInput (change)="onFileChange($event, 'productImageUuid')">
   <img #image>
+  <mat-error *ngIf="this.productFormGroup.get('productImageUuid')?.hasError('required')">
+    {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.IMAGE_URL' | translate}}
+  </mat-error>
   
 </div>

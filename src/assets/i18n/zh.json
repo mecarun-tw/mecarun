@@ -24,6 +24,12 @@
         "DESCRIPTION": "介紹",
         "THUMBNAIL_URL": "縮圖",
         "IMAGE_URL": "圖片"
+      },
+      "ERROR_MESSAGE": {
+        "SHORT_DESCRIPTION": "簡介不可空白！",
+        "DESCRIPTION": "介紹不可空白！",
+        "THUMBNAIL_URL": "縮圖不可空白！",
+        "IMAGE_URL": "圖片不可空白！"
       }
     }
   }

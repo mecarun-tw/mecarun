@@ -251,7 +251,7 @@ export class Api implements ApiInterface {
     console.log('api readProduct');
     const index = this.products.findIndex(product => product.uuid === uuid);
     if (index === -1) {
-      return Promise.reject('NOT_EXSIT');
+      return Promise.reject('NOT_EXIST');
     } else {
       return Promise.resolve({...this.products[index]} as Product);
     }
