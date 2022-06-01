@@ -3,6 +3,7 @@
   "LANGUAGE_BUTTON": "中文",
   "SVAE_BUTTON": "Save",
   "CANCEL_BUTTON": "Cancel",
+  "DELETE_BUTTON": "Delete",
   "PUBLIC": {
     "MAIN_MENU": {
       "PRODUCTS": "Products",
@@ -13,6 +14,12 @@
   "ADMIN": {
     "MAIN_MENU": {
       "PRODUCT_MANAGEMENT": "Product Management"
+    },
+    "PRODUCT_MANAGEMENT": {
+      "CONFIRM_DELETE_DIALOG": {
+        "TITLE": "Confirm delete",
+        "MESSAGE": "Are you shure to delete this product?"
+      }
     },
     "PRODUCT_EDITOR": {
       "TITLE": "Product Editor",

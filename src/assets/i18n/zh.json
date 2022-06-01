@@ -3,6 +3,7 @@
   "LANGUAGE_BUTTON": "English",
   "SVAE_BUTTON": "儲存",
   "CANCEL_BUTTON": "取消",
+  "DELETE_BUTTON": "刪除",
   "PUBLIC": {
     "MAIN_MENU": {
       "PRODUCTS": "產品列表",
@@ -13,6 +14,12 @@
   "ADMIN": {
     "MAIN_MENU": {
       "PRODUCT_MANAGEMENT": "產品管理"
+    },
+    "PRODUCT_MANAGEMENT": {
+      "CONFIRM_DELETE_DIALOG": {
+        "TITLE": "確認刪除",
+        "MESSAGE": "你確定要刪除這個產品嗎？"
+      }
     },
     "PRODUCT_EDITOR": {
       "TITLE": "產品編輯器",

@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
+import { ConfirmDeleteComponent } from 'src/app/_elements/dialogs/confirm-delete/confirm-delete.component';
 import { ProductKey, getProductUuid } from 'src/app/_interfaces/product.interface';
 import { ProductsService } from 'src/app/_services/products.service';
 import { environment } from 'src/environments/environment';
@@ -19,7 +21,8 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
 
   constructor(
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private matDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +47,16 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct = (uuid: string): void => {
-    this.productsService.deleteProduct(uuid);
+    this.matDialog.open(ConfirmDeleteComponent, {
+      data: {
+        title: 'ADMIN.PRODUCT_MANAGEMENT.CONFIRM_DELETE_DIALOG.TITLE',
+        message: 'ADMIN.PRODUCT_MANAGEMENT.CONFIRM_DELETE_DIALOG.MESSAGE'
+      }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.productsService.deleteProduct(uuid);
+      }
+    });
   }
 
   modifyProduct = (mode: string, language: string, productId: string) => {

@@ -1,0 +1,9 @@
+@use '/src/app/_styles/global';
+
+.mat-dialog-title {
+  width: 512px;
+}
+
+.confirm-button {
+  color: global.$theme-color-red;
+}
