@@ -20,4 +20,14 @@
     bottom: 28px;
     background-color: global.$theme-color-dark-light;
   }
+
+}
+
+::ng-deep .language-menu {
+  background-color: global.$backgroud-color-light;
+
+  .active-language-button {
+    background-color: global.$backgroud-color;
+    border-bottom: 1px solid global.$theme-color-dark-light;
+  }
 }

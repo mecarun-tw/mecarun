@@ -6,7 +6,7 @@
       <button
         mat-icon-button
         [matMenuTriggerFor]="languageMenu"
-        [matMenuTriggerData]="{mode: 'edit', productId: productKey.productId}">
+        [matMenuTriggerData]="{mode: 'edit', productId: productKey.productId, productLanguage: productKey.language}">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button (click)="deleteProduct(productKey.uuid)"><mat-icon>delete</mat-icon></button>
@@ -14,15 +14,16 @@
    </mat-list>
   
    <button mat-fab [matMenuTriggerFor]="languageMenu" [matMenuTriggerData]="{mode: 'create'}"><mat-icon>add</mat-icon></button>
+  </div>
 
-   <mat-menu #languageMenu="matMenu">
-    <ng-template matMenuContent let-mode="mode" let-productId="productId">
-      <button
-        mat-menu-item
-        *ngFor="let language of languages"
-        (click)="modifyProduct(mode, language.code, productId)">
-        {{language.display}}
-      </button>
-    </ng-template>
-  </mat-menu>
-</div>
+  <mat-menu #languageMenu="matMenu" class="language-menu">
+   <ng-template matMenuContent let-mode="mode" let-productId="productId" let-productLanguage="productLanguage">
+     <button
+       mat-menu-item
+       *ngFor="let language of languages"
+       [ngClass]="{'active-language-button': language.code === productLanguage}"
+       (click)="modifyProduct(mode, language.code, productId)">
+       {{language.display}}
+     </button>
+   </ng-template>
+ </mat-menu>
