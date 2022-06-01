@@ -1,6 +1,5 @@
-import { ThisReceiver } from '@angular/compiler';
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AfterContentInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { filter, first, map, switchAll } from 'rxjs/operators';
@@ -14,7 +13,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './product-editor.component.html',
   styleUrls: ['./product-editor.component.scss']
 })
-export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @ViewChild('thumbnail') thumbnailElement!: ElementRef;
   @ViewChild('image') productImageElement!: ElementRef;
@@ -59,7 +58,7 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit(): void {
     this.productFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
-      language: ['', Validators.required],
+      language: [{value: '', disabled: true}],
       price: ['', Validators.required],
       shortDescription: [''],
       description: [''],
@@ -68,8 +67,7 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   
-  ngAfterViewInit(): void {
-
+  ngAfterContentInit(): void {
     this.activatedRoute.paramMap.pipe(
       map(paramMap => paramMap.get('uuid')),
       first(),
@@ -77,15 +75,12 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
         if (uuid === null) {
           return of(null)
         } else {
-          return this.productsService.getProductByUuid(uuid).pipe(
-            filter(product => !!product),
-            map(product => product)
-          );
+          return this.productsService.getProductByUuid(uuid);
         }
       }),
       switchAll()
     ).subscribe(product => {
-      if (product) {
+      if (product) { // edit
         this.uuid = product.uuid;
         this.productId = product.productId;
         this.initImageUuid['thumbnailUuid'] = product.thumbnailUuid;
@@ -112,24 +107,17 @@ export class ProductEditorComponent implements OnInit, AfterViewInit, OnDestroy 
           thumbnailUuid: product.thumbnailUuid,
           productImageUuid: product.productImageUuid,
         }, { emitEvent: false});
-      }
-    });
-
-    this.productFormGroup.get('language')?.valueChanges.subscribe(language => {
-      if (this.uuid && this.productId) { // create or edit
-        this.productsService.getProduct(this.productId, language).pipe(
-          filter(productResponse => productResponse !== null)
-        ).subscribe(productResponse => {
-          if (productResponse) {
-            this.router.navigate(['admin', 'product-editor', productResponse.uuid]);
-          } else { // undefined
-            this.uuid = null;
-            this.productFormGroup.reset();
+      } else { // create
+        this.activatedRoute.queryParams.pipe(
+          map(params => params.language),
+          first()
+        ).subscribe(language => {
+          if (product === null) { // triggered by add button
             this.productFormGroup.get('language')?.setValue(language);
-            this.resetImageElement('thumbnailUuid');
-            this.resetImageElement('productImageUuid');
+          } else { // product === undefined, triggered by edit button
+            this.router.navigate(['admin', 'product-editor'], {queryParams: {language}});
           }
-        })
+        });
       }
     });
   }

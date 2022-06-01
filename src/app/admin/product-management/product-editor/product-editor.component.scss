@@ -24,6 +24,17 @@
     width: 100%;
     margin-bottom: 16px;
     background-color: global.$backgroud-color;
+
+    ::ng-deep .mat-select-disabled {
+
+      .mat-select-value {
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      .mat-select-arrow {
+        visibility: hidden;
+      }
+    }
   }
 
   .field-title-bar {

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { ProductKey } from 'src/app/_interfaces/product.interface';
+import { ProductKey, getProductUuid } from 'src/app/_interfaces/product.interface';
 import { ProductsService } from 'src/app/_services/products.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class ProductManagementComponent implements OnInit, OnDestroy {
 
   productKeys: ProductKey[] = [];
+  languages = environment.languages;
   destroy$ = new Subject<void>();
 
   constructor(
@@ -42,16 +43,20 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  editProduct = (uuid: string): void => {
-    this.router.navigate(['admin', 'product-editor', uuid]);
-  }
-
   deleteProduct = (uuid: string): void => {
     this.productsService.deleteProduct(uuid);
   }
 
-  createProduct = () => {
-    this.router.navigate(['admin', 'product-editor']);
+  modifyProduct = (mode: string, language: string, productId: string) => {
+    switch (mode) {
+      case 'create':
+        this.router.navigate(['admin', 'product-editor'], {queryParams: {language}});
+        break;
+      case 'edit':
+        const uuid = getProductUuid(productId, language);
+        this.router.navigate(['admin', 'product-editor', uuid], {queryParams: {language}});
+        break;
+    }
   }
 
 }

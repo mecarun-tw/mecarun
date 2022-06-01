@@ -3,10 +3,26 @@
     <mat-list-item *ngFor="let productKey of productKeys">
       {{productKey.name}}
       <span class="spacer"></span>
-      <button mat-icon-button (click)="editProduct(productKey.uuid)"><mat-icon>edit</mat-icon></button>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="languageMenu"
+        [matMenuTriggerData]="{mode: 'edit', productId: productKey.productId}">
+        <mat-icon>edit</mat-icon>
+      </button>
       <button mat-icon-button (click)="deleteProduct(productKey.uuid)"><mat-icon>delete</mat-icon></button>
     </mat-list-item>
    </mat-list>
   
-   <button mat-fab (click)="createProduct()"><mat-icon>add</mat-icon></button>
+   <button mat-fab [matMenuTriggerFor]="languageMenu" [matMenuTriggerData]="{mode: 'create'}"><mat-icon>add</mat-icon></button>
+
+   <mat-menu #languageMenu="matMenu">
+    <ng-template matMenuContent let-mode="mode" let-productId="productId">
+      <button
+        mat-menu-item
+        *ngFor="let language of languages"
+        (click)="modifyProduct(mode, language.code, productId)">
+        {{language.display}}
+      </button>
+    </ng-template>
+  </mat-menu>
 </div>
