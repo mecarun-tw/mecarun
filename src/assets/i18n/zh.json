@@ -4,6 +4,15 @@
   "SVAE_BUTTON": "儲存",
   "CANCEL_BUTTON": "取消",
   "DELETE_BUTTON": "刪除",
+  "LOGIN_DIALOG": {
+    "TITLE": "權限確認",
+    "TOKEN_INPUT_LABEL": "權限序號",
+    "LOGIN_BUTTON": "確認",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "序號不能空白！",
+      "ACCESS_FAIL": "存取失敗！"
+    }
+  },
   "PUBLIC": {
     "MAIN_MENU": {
       "PRODUCTS": "產品列表",

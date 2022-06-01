@@ -11,12 +11,14 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { ProductEditorComponent } from './product-management/product-editor/product-editor.component';
+import { LoginComponent } from 'src/app/_elements/dialogs/login/login.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     ProductManagementComponent,
-    ProductEditorComponent
+    ProductEditorComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,15 @@
   "SVAE_BUTTON": "Save",
   "CANCEL_BUTTON": "Cancel",
   "DELETE_BUTTON": "Delete",
+  "LOGIN_DIALOG": {
+    "TITLE": "Permission confirm",
+    "TOKEN_INPUT_LABEL": "Permission token",
+    "LOGIN_BUTTON": "Confirm",
+    "ERROR_MESSAGE": {
+      "REQUIRED": "Token can not be empty!",
+      "ACCESS_FAIL": "Access fail!"
+    }
+  },
   "PUBLIC": {
     "MAIN_MENU": {
       "PRODUCTS": "Products",

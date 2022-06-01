@@ -33,7 +33,7 @@
     formControlName="shortDescription"
     [modules]="quillEditorModols">
   </quill-editor>
-  <mat-error *ngIf="this.productFormGroup.get('shortDescription')?.hasError('required')">
+  <mat-error *ngIf="productFormGroup.get('shortDescription')?.hasError('required')">
     {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.SHORT_DESCRIPTION' | translate}}
   </mat-error>
 
@@ -44,7 +44,7 @@
     formControlName="description"
     [modules]="quillEditorModols">
   </quill-editor>
-  <mat-error *ngIf="this.productFormGroup.get('description')?.hasError('required')">
+  <mat-error *ngIf="productFormGroup.get('description')?.hasError('required')">
     {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.DESCRIPTION' | translate}}
   </mat-error>
 
@@ -54,7 +54,7 @@
   </div>
   <input type="file" class="file-upload-input" #thumbnailInput (change)="onFileChange($event, 'thumbnailUuid')">
   <img #thumbnail>
-  <mat-error *ngIf="this.productFormGroup.get('thumbnailUuid')?.hasError('required')">
+  <mat-error *ngIf="productFormGroup.get('thumbnailUuid')?.hasError('required')">
     {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.THUMBNAIL_URL' | translate}}
   </mat-error>
 
@@ -64,7 +64,7 @@
   </div>
   <input type="file" class="file-upload-input" #imageInput (change)="onFileChange($event, 'productImageUuid')">
   <img #image>
-  <mat-error *ngIf="this.productFormGroup.get('productImageUuid')?.hasError('required')">
+  <mat-error *ngIf="productFormGroup.get('productImageUuid')?.hasError('required')">
     {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.IMAGE_URL' | translate}}
   </mat-error>
   

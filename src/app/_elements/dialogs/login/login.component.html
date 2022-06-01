@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{'LOGIN_DIALOG.TITLE' | translate}}</h1>
+
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>{{'LOGIN_DIALOG.TOKEN_INPUT_LABEL' | translate}}</mat-label>
+    <input matInput [formControl]="tokenControl">
+    <mat-error *ngIf="tokenControl.hasError('required')">
+      {{'LOGIN_DIALOG.ERROR_MESSAGE.REQUIRED' | translate}}
+    </mat-error>
+    <mat-error *ngIf="tokenControl.hasError('accessFail')">
+      {{'LOGIN_DIALOG.ERROR_MESSAGE.ACCESS_FAIL' | translate}}
+    </mat-error>
+  </mat-form-field>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">{{'CANCEL_BUTTON'  | translate}}</button>
+  <button mat-button cdkFocusInitial (click)="submit()">{{'LOGIN_DIALOG.LOGIN_BUTTON'  | translate}}</button>
+</mat-dialog-actions>

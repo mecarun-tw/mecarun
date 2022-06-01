@@ -1,6 +1,8 @@
 import { Product, ProductKey } from "src/app/_interfaces/product.interface";
 
 export interface ApiInterface {
+
+  login: (token: string) => Promise<void>;
   
   readProductKeys: (language: string ) => Promise<ProductKey[]>;
   createProductKey: (productKey: ProductKey) => Promise<ProductKey>;

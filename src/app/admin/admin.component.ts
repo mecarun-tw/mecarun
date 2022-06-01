@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  private subscribeActivateLinkByUrlChange = ():void => {
+  private subscribeActivateLinkByUrlChange = (): void => {
     this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd),
       map(e => e.url),
