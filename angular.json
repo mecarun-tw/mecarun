@@ -78,6 +78,9 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },{
+                  "replace": "src/app/_api/mock.api.ts",
+                  "with": "src/app/_api/firebase.api.ts"
                 }
               ],
               "outputHashing": "all"
@@ -88,7 +91,30 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/_modules/firebase/firebase.module.ts",
+                  "with": "src/app/_modules/firebase/firebase-development.module.ts"
+                }
+              ]
+            },
+            "firebaseDevalopment": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },{
+                  "replace": "src/app/_api/mock.api.ts",
+                  "with": "src/app/_api/firebase.api.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -101,6 +127,9 @@
             },
             "development": {
               "browserTarget": "mecarun:build:development"
+            },
+            "firebaseDevalopment": {
+              "browserTarget": "mecarun:build:firebaseDevalopment"
             }
           },
           "defaultConfiguration": "development"

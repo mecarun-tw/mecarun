@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, from } from 'rxjs';
 import { filter, first, map } from 'rxjs/operators';
-// import { Api } from 'src/app/_api/firebase.api';
 import { Api } from 'src/app/_api/mock.api';
-import { Product, ProductKey, getProductUuid } from 'src/app/_interfaces/product.interface';
+import { Product, ProductKey, getProductUuid, productToProductKey } from 'src/app/_interfaces/product.interface';
 @Injectable({
   providedIn: 'any'
 })
@@ -52,11 +51,18 @@ export class ProductsService {
   }
 
   createProduct = (product: Product): Promise<void> => {
-    return this.api.createProductKey(product).then(productKeyResponse => {
+    const productKey = productToProductKey(product);
+    return this.api.createProductKey(productKey).then(productKeyResponse => {
       product.uuid = productKeyResponse.uuid;
       product.productId = productKeyResponse.productId;
-      const productKeys$ = this.getProductKeys(productKeyResponse.language) as BehaviorSubject<ProductKey[]>;
-      productKeys$.next([...productKeys$.value, productKeyResponse]);
+      const productKeys$ = this.getProductKeys(product.language);
+      productKeys$.pipe(
+        filter(productKeys => !!productKeys),
+        map(productKeys => productKeys as ProductKey[]),
+        first()
+      ).subscribe(productKeys => {
+        productKeys$.next([...productKeys, productKeyResponse])
+      });
       return this.api.createProduct(product);
     }).then(productResponse => {
       const product$ = new BehaviorSubject<Product|null|undefined>(null);

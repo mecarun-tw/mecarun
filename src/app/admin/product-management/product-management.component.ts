@@ -29,8 +29,8 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
     combineLatest(
       environment.languages.map(language => {
         return this.productsService.getProductKeys(language.code).pipe(
-          filter(productKeys => !!productKeys),
-          map(productKeys => productKeys as ProductKey[])
+          filter(productKeys => productKeys !== null),
+          map(productKeys => productKeys !== undefined ? productKeys as ProductKey[] : [])
         );
       })
     ).pipe(

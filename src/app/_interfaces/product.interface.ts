@@ -18,6 +18,18 @@ export interface Product extends ProductKey {
   externalLinks: ExternalLink[];
 }
 
-export function getProductUuid(productId: string, language: string) {
+export function getProductUuid(productId: string, language: string): string {
   return uuidv5([productId, language].join('_'), environment.UUID_NAMESPACE);
+}
+
+export function productToProductKey (product: Product): ProductKey {
+  return {
+    uuid: product.uuid,
+    productId: product.productId,
+    language: product.language,
+    name: product.name,
+    price: product.price,
+    shortDescription: product.shortDescription,
+    thumbnailUuid: product.thumbnailUuid,
+  } as ProductKey;
 }
