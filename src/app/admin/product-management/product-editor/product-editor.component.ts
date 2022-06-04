@@ -109,13 +109,11 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
         }, { emitEvent: false});
       } else { // create
         this.activatedRoute.queryParams.pipe(
-          map(params => params.language),
           first()
-        ).subscribe(language => {
-          if (product === null) { // triggered by add button
-            this.productFormGroup.get('language')?.setValue(language);
-          } else { // product === undefined, triggered by edit button
-            this.router.navigate(['admin', 'product-editor'], {queryParams: {language}});
+        ).subscribe(params => {
+          this.productFormGroup.get('language')?.setValue(params.language);
+          if (product === undefined) {
+            this.productId = params.productId;
           }
         });
       }
@@ -140,7 +138,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
     if (this.productFormGroup.valid) {
       const product = {
         uuid: '',
-        productId: '',
+        productId: this.productId ? this.productId : '',
         name: this.productFormGroup.get('name')?.value,
         language: this.productFormGroup.get('language')?.value,
         price: this.productFormGroup.get('price')?.value,
@@ -151,7 +149,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
         externalLinks: []
       } as Product;
 
-      if (this.uuid && this.productId && this.productFormGroup.dirty) {
+      if (this.uuid && this.productId && this.productFormGroup.dirty) { // edit
         Promise.all([
           this.uploadImageByControlName('thumbnailUuid'),
           this.uploadImageByControlName('productImageUuid')
@@ -176,7 +174,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
           });
         });
       }
-    } else {
+    } else { //not valid
       this.productFormGroup.markAllAsTouched(); this.productFormGroup.get('shortDescription')?.hasError('required')
     }
   }

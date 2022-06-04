@@ -57,7 +57,7 @@ export class ProductsService {
       product.productId = productKeyResponse.productId;
       const productKeys$ = this.getProductKeys(product.language);
       productKeys$.pipe(
-        filter(productKeys => !!productKeys),
+        filter(productKeys => productKeys !== null),
         map(productKeys => productKeys as ProductKey[]),
         first()
       ).subscribe(productKeys => {
@@ -86,18 +86,26 @@ export class ProductsService {
   }
 
   deleteProduct = (uuid: string): Promise<void> => {
+
     return this.api.deleteProductKey(uuid).then(() => {
       return this.getProductByUuid(uuid).pipe(
         filter(_product => !!_product),
-        map(_product => _product?.language as string),
+        map(_product => _product as Product),
         first()
       ).toPromise();
-    }).then(language => {
-      const productKeys$ = this.getProductKeys(language) as BehaviorSubject<ProductKey[]>;
+    }).then(_product => {
+      // remove local productKey
+      const productKeys$ = this.getProductKeys(_product.language) as BehaviorSubject<ProductKey[]>;
       const productKeys = productKeys$.value;
       const index = productKeys.findIndex(productKeysElement => productKeysElement.uuid === uuid);
       productKeys.splice(index, 1);
       productKeys$.next(productKeys);
+      // delete image
+      return Promise.all([
+        this.api.deleteImage(_product.thumbnailUuid),
+        this.api.deleteImage(_product.productImageUuid),
+      ]);
+    }).then(() => {
       return this.api.deleteProduct(uuid);
     }).then(() => {
       this.products.get(uuid)?.complete();

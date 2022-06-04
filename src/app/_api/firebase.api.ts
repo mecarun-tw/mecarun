@@ -38,7 +38,9 @@ export class Api implements ApiInterface {
   };
 
   createProductKey = (productKey: ProductKey) => {
-    productKey.productId = uuidv4();
+    if (productKey.productId === '') {
+      productKey.productId = uuidv4();
+    }
     productKey.uuid = getProductUuid(productKey.productId, productKey.language);
     return this.angularFirestore.doc<ProductKey>('productKeys/' + productKey.uuid).set(productKey).then(() => {
       return productKey;

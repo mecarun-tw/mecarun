@@ -227,7 +227,9 @@ export class Api implements ApiInterface {
 
   createProductKey = (productKey: ProductKey) => {
     console.log('api createProductKey');
-    productKey.productId = uuidv4();
+    if (productKey.productId === '') {
+      productKey.productId = uuidv4();
+    }
     productKey.uuid = getProductUuid(productKey.productId, productKey.language);
     this.productKeys.push(productKey);
     return Promise.resolve({...productKey} as ProductKey);

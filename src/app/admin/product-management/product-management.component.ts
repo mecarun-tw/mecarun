@@ -66,7 +66,7 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
         break;
       case 'edit':
         const uuid = getProductUuid(productId, language);
-        this.router.navigate(['admin', 'product-editor', uuid], {queryParams: {language}});
+        this.router.navigate(['admin', 'product-editor', uuid], {queryParams: {language, productId}});
         break;
     }
   }
