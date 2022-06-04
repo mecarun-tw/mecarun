@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getProductUuid, Product, ProductKey } from "src/app/_interfaces/product.interface";
 import { ApiInterface } from "./api.interface";
 import { v4 as uuidv4 } from 'uuid';
@@ -13,15 +14,13 @@ export class Api implements ApiInterface {
   constructor (
     private angularFirestore: AngularFirestore,
     private angularFireStorage: AngularFireStorage,
+    private angularFireAuth: AngularFireAuth,
   ) {}
 
   login = (token: string) => {
-    console.log('api login');
-    if (token === 'ADMIN_TOKEN') {
-      return Promise.resolve();
-    } else {
-      return Promise.reject();
-    }
+    return this.angularFireAuth.signInWithEmailAndPassword('administrator@mail.com', token).then(() => {
+      return;
+    });
   };
 
   readProductKeys = (language: string) => {
