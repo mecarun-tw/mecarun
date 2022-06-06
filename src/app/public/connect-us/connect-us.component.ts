@@ -12,7 +12,6 @@ export class ConnectUsComponent implements OnInit {
     { site: 'MECARUN', externalUrl: 'https://www.mecarun.fr'},
     { site: 'RUTEN', externalUrl: 'https://www.ruten.com.tw/store/danili51100/'},
     { site: 'SHOPEE', externalUrl: 'https://shopee.tw/queen_japan'},
-    { site: 'PCSTORE', externalUrl: 'https://seller.pcstore.com.tw/S167293963/'},
     { site: 'FB', externalUrl: 'https://business.facebook.com/mecarunP18/'},
   ];
 

@@ -39,6 +39,8 @@
 
     .product-short-description {
       flex: 1 1 1px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .product-price {
