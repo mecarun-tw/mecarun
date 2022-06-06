@@ -7,7 +7,7 @@
     <button mat-stroked-button (click)="submit()">{{'SVAE_BUTTON' | translate}}</button>
   </div>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.LANGUAGE' | translate}}</mat-label>
     <mat-select formControlName="language">
       <mat-option *ngFor="let language of languages" [value]="language.code">
@@ -16,12 +16,12 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.NAME' | translate}}</mat-label>
     <input matInput formControlName="name">
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.PRICE' | translate}}</mat-label>
     <input matInput formControlName="price">
   </mat-form-field>
@@ -47,6 +47,32 @@
   <mat-error *ngIf="productFormGroup.get('description')?.hasError('required')">
     {{'ADMIN.PRODUCT_EDITOR.ERROR_MESSAGE.DESCRIPTION' | translate}}
   </mat-error>
+
+  <div class="field-title-bar">
+    <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.EXTERNAL_LINKS' | translate}}</h4>
+    <button mat-icon-button (click)="addExternalLink()"><mat-icon>add</mat-icon></button>
+  </div>
+  <div formArrayName="externalLinks">
+    <div *ngFor="let control of getExternalLinksControls(); let groupName=index;" [formGroupName]="groupName" class="external-link-row">
+
+      <mat-form-field appearance="outline" class="site-form-field">
+        <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.SITE' | translate}}</mat-label>
+        <mat-select formControlName="site">
+          <mat-option *ngFor="let externalLinkSite of externalLinkSites" [value]="externalLinkSite.SITE">
+            {{externalLinkSite.SITE}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.EXTERNAL_LINKS' | translate}}</mat-label>
+        <input matInput formControlName="externalUrl">
+      </mat-form-field>
+
+      <button mat-icon-button (click)="removeExternalLink(groupName)"><mat-icon>delete</mat-icon></button>
+
+    </div>
+  </div>
 
   <div class="field-title-bar">
     <h4>{{'ADMIN.PRODUCT_EDITOR.INPUT_LABEL.THUMBNAIL_URL' | translate}}</h4>

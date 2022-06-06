@@ -94,10 +94,10 @@ export class Api implements ApiInterface {
       `,
       productImageUuid: '690a4b4b-acb0-46f7-974e-1ad28c8c7c98',
       externalLinks: [
-        { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
-        { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
-        { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203'},
-        { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
+        { site: 'MECARUN', externalUrl: 'https://www.mecarun.fr'},
+        { site: 'RUTEN', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
+        { site: 'SHOPEE', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203'},
+        { site: 'PCSTORE', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
       ]
     }, this.productKeys[0]),
     Object.assign({
@@ -121,10 +121,10 @@ export class Api implements ApiInterface {
       `,
       productImageUuid: 'd5037052-c03b-42d9-822b-667b4b177e44',
       externalLinks: [
-        { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
-        { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22125304134175'},
-        { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5792877790'},
-        { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415246.htm'},
+        { site: 'MECARUN', externalUrl: 'https://www.mecarun.fr'},
+        { site: 'RUTEN', externalUrl: 'https://www.ruten.com.tw/item/show?22125304134175'},
+        { site: 'SHOPEE', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5792877790'},
+        { site: 'PCSTORE', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415246.htm'},
       ]
     }, this.productKeys[1]),
     Object.assign({
@@ -153,10 +153,10 @@ export class Api implements ApiInterface {
       `,
       productImageUuid: 'c1a8b1cd-62f2-4ab0-8401-429f284f5ac1',
       externalLinks: [
-        { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
-        { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22128716636532'},
-        { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/Mecarun-C99-Racing推出的專業賽車汽油辛烷值濃，就是世界級最專業的賽車汽油濃縮液！-i.1403035.8490191326'},
-        { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415258.htm'},
+        { site: 'MECARUN', externalUrl: 'https://www.mecarun.fr'},
+        { site: 'RUTEN', externalUrl: 'https://www.ruten.com.tw/item/show?22128716636532'},
+        { site: 'SHOPEE', externalUrl: 'https://shopee.tw/Mecarun-C99-Racing推出的專業賽車汽油辛烷值濃，就是世界級最專業的賽車汽油濃縮液！-i.1403035.8490191326'},
+        { site: 'PCSTORE', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1440415258.htm'},
       ]
     }, this.productKeys[2]),
     Object.assign({
@@ -192,10 +192,10 @@ export class Api implements ApiInterface {
       `,
       productImageUuid: 'd2f9468c-1671-4d66-804c-4d2075222eb3',
       externalLinks: [
-        { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
-        { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
-        { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203'},
-        { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
+        { site: 'MECARUN', externalUrl: 'https://www.mecarun.fr'},
+        { site: 'RUTEN', externalUrl: 'https://www.ruten.com.tw/item/show?22120517100641'},
+        { site: 'SHOPEE', externalUrl: 'https://shopee.tw/《法國進口》Méca-run-C99汽油-是降低消耗和節約能源的標杆-清潔°預防°潤滑°省油環保°可提升馬力-i.1403035.5492878203'},
+        { site: 'PCSTORE', externalUrl: 'https://seller.pcstore.com.tw/S167293963/C1439691388.htm'},
       ]
     }, this.productKeys[3])
   ];

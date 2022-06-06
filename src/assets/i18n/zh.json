@@ -38,6 +38,8 @@
         "PRICE": "價格",
         "SHORT_DESCRIPTION": "簡介",
         "DESCRIPTION": "介紹",
+        "EXTERNAL_LINKS": "外部連結",
+        "SITE": "網站",
         "THUMBNAIL_URL": "縮圖",
         "IMAGE_URL": "圖片"
       },

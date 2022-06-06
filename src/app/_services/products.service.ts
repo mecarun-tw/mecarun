@@ -61,7 +61,7 @@ export class ProductsService {
         map(productKeys => productKeys as ProductKey[]),
         first()
       ).subscribe(productKeys => {
-        productKeys$.next([...productKeys, productKeyResponse])
+        productKeys$.next(productKeys ? [...productKeys, productKeyResponse] : [productKeyResponse])
       });
       return this.api.createProduct(product);
     }).then(productResponse => {
@@ -73,11 +73,16 @@ export class ProductsService {
 
   updateProduct = (product: Product): Promise<void> => {
     return this.api.updateProductKey(product).then(productKeyResponse => {
-      const productKeys$ = this.getProductKeys(product.language) as BehaviorSubject<ProductKey[]>;
-      const productKeys = productKeys$.value;
-      const index = productKeys.findIndex(productKeysElement => productKeysElement.uuid === product.uuid);
-      productKeys[index] = productKeyResponse;
-      productKeys$.next(productKeys);
+      const productKeys$ = this.getProductKeys(product.language);
+      productKeys$.pipe(
+        filter(productKeys => productKeys !== null),
+        map(productKeys => productKeys as ProductKey[]),
+        first()
+      ).subscribe(productKeys => {
+        const index = productKeys.findIndex(productKeysElement => productKeysElement.uuid === product.uuid);
+        productKeys[index] = productKeyResponse;
+        productKeys$.next(productKeys);
+      });
       return this.api.updateProduct(product);
     }).then(productResponse => {
       const product$ = this.products.get(product.uuid) as BehaviorSubject<Product>;
@@ -95,11 +100,16 @@ export class ProductsService {
       ).toPromise();
     }).then(_product => {
       // remove local productKey
-      const productKeys$ = this.getProductKeys(_product.language) as BehaviorSubject<ProductKey[]>;
-      const productKeys = productKeys$.value;
-      const index = productKeys.findIndex(productKeysElement => productKeysElement.uuid === uuid);
-      productKeys.splice(index, 1);
-      productKeys$.next(productKeys);
+      const productKeys$ = this.getProductKeys(_product.language);
+      productKeys$.pipe(
+        filter(productKeys => productKeys !== null),
+        map(productKeys => productKeys as ProductKey[]),
+        first()
+      ).subscribe(productKeys => {
+        const index = productKeys.findIndex(productKeysElement => productKeysElement.uuid === uuid);
+        productKeys.splice(index, 1);
+        productKeys$.next(productKeys);
+      });
       // delete image
       return Promise.all([
         this.api.deleteImage(_product.thumbnailUuid),

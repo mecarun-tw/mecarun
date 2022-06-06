@@ -19,7 +19,25 @@ export const environment = {
     THUMBNAIL_MAX_HEIGHT: 176, // px
     IMAGE_MAX_WIDTH: 352, // px
     IMAGE_MAX_HEIGHT: 352 // px
-  }
+  },
+  EXTERNAL_LINK_SITES: [
+    {
+      SITE: 'MECARUN',
+      IMAGE_URL: 'assets/images/mecarun-icon.png'
+    }, {
+      SITE: 'RUTEN',
+      IMAGE_URL: 'assets/images/ruten-icon.png'
+    }, {
+      SITE: 'SHOPEE',
+      IMAGE_URL: 'assets/images/shopee-icon.png'
+    }, {
+      SITE: 'PCSTORE',
+      IMAGE_URL: 'assets/images/pcstore-icon.png'
+    }, {
+      SITE: 'FB',
+      IMAGE_URL: 'assets/images/fb-icon.png'
+    }, 
+  ]
 };
 
 /*

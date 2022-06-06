@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExternalLink } from 'src/app/_interfaces/external-link.interface';
+import { ExternalLink, getExternalLinkIconUrl } from 'src/app/_interfaces/external-link.interface';
 
 @Component({
   selector: 'app-connect-us',
@@ -9,11 +9,11 @@ import { ExternalLink } from 'src/app/_interfaces/external-link.interface';
 export class ConnectUsComponent implements OnInit {
 
   externalLinks: ExternalLink[] = [
-    { imageUrl: 'assets/images/mecarun-icon.png', externalUrl: 'https://www.mecarun.fr'},
-    { imageUrl: 'assets/images/ruten-icon.png', externalUrl: 'https://www.ruten.com.tw/store/danili51100/'},
-    { imageUrl: 'assets/images/shopee-icon.png', externalUrl: 'https://shopee.tw/queen_japan'},
-    { imageUrl: 'assets/images/pcstore-icon.png', externalUrl: 'https://seller.pcstore.com.tw/S167293963/'},
-    { imageUrl: 'assets/images/fb-icon.png', externalUrl: 'https://business.facebook.com/mecarunP18/'},
+    { site: 'MECARUN', externalUrl: 'https://www.mecarun.fr'},
+    { site: 'RUTEN', externalUrl: 'https://www.ruten.com.tw/store/danili51100/'},
+    { site: 'SHOPEE', externalUrl: 'https://shopee.tw/queen_japan'},
+    { site: 'PCSTORE', externalUrl: 'https://seller.pcstore.com.tw/S167293963/'},
+    { site: 'FB', externalUrl: 'https://business.facebook.com/mecarunP18/'},
   ];
 
   constructor() { }
@@ -22,4 +22,7 @@ export class ConnectUsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  _getExternalLinkIconUrl = (site: string) => {
+    return getExternalLinkIconUrl(site) as string;
+  }
 }

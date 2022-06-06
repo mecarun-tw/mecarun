@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { filter, first, map, switchAll } from 'rxjs/operators';
@@ -26,6 +26,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
     'productImageUuid': null,
   }
   languages = environment.languages;
+  externalLinkSites = environment.EXTERNAL_LINK_SITES;
   destroy$ = new Subject<void>();
 
   quillEditorModols = {
@@ -62,6 +63,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
       price: ['', Validators.required],
       shortDescription: [''],
       description: [''],
+      externalLinks: this.formBuilder.array([]),
       thumbnailUuid: [''],
       productImageUuid: [''],
     });
@@ -75,7 +77,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
         if (uuid === null) {
           return of(null)
         } else {
-          return this.productsService.getProductByUuid(uuid);
+          return this.productsService.getProductByUuid(uuid).pipe(filter(product => product !== null), first());
         }
       }),
       switchAll()
@@ -98,12 +100,15 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
           first()
         ).subscribe(imageUrl => this.setImageElement(imageUrl, 'thumbnailUuid'));
   
+        product.externalLinks.forEach(() => this.addExternalLink());
+
         this.productFormGroup.setValue({
           name: product.name,
           language: product.language,
           price: product.price,
           shortDescription: product.shortDescription,
           description: product.description,
+          externalLinks: product.externalLinks,
           thumbnailUuid: product.thumbnailUuid,
           productImageUuid: product.productImageUuid,
         }, { emitEvent: false});
@@ -146,22 +151,26 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
         description: this.productFormGroup.get('description')?.value,
         thumbnailUuid: this.productFormGroup.get('thumbnailUuid')?.value,
         productImageUuid: this.productFormGroup.get('productImageUuid')?.value,
-        externalLinks: []
+        externalLinks: (this.productFormGroup.get('externalLinks') as FormArray).getRawValue(),
       } as Product;
 
-      if (this.uuid && this.productId && this.productFormGroup.dirty) { // edit
-        Promise.all([
-          this.uploadImageByControlName('thumbnailUuid'),
-          this.uploadImageByControlName('productImageUuid')
-        ]).then(() => {
-          product.uuid = this.uuid as string;
-          product.productId = this.productId as string;
-          product.thumbnailUuid = this.productFormGroup.get('thumbnailUuid')?.value;
-          product.productImageUuid = this.productFormGroup.get('productImageUuid')?.value;
-          this.productsService.updateProduct(product).then(() => {
-            this.router.navigate(['admin', 'product-management']);
+      if (this.uuid && this.productId) { // edit
+        if (this.productFormGroup.dirty) {
+          Promise.all([
+            this.uploadImageByControlName('thumbnailUuid'),
+            this.uploadImageByControlName('productImageUuid')
+          ]).then(() => {
+            product.uuid = this.uuid as string;
+            product.productId = this.productId as string;
+            product.thumbnailUuid = this.productFormGroup.get('thumbnailUuid')?.value;
+            product.productImageUuid = this.productFormGroup.get('productImageUuid')?.value;
+            this.productsService.updateProduct(product).then(() => {
+              this.router.navigate(['admin', 'product-management']);
+            });
           });
-        });
+        } else { // form is not dirty
+          this.router.navigate(['admin', 'product-management']);
+        }
       } else { //create
         Promise.all([
           this.uploadImageByControlName('thumbnailUuid'),
@@ -179,10 +188,25 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
     }
   }
 
+  addExternalLink = () => {
+    const externalLinksControls = this.productFormGroup.get('externalLinks') as FormArray;
+    externalLinksControls.push(this.formBuilder.group({
+      site: ['', Validators.required],
+      externalUrl: ['', Validators.required],
+    }));
+  }
+
+  getExternalLinksControls = () => {
+    return (this.productFormGroup.get('externalLinks') as FormArray).controls;
+  }
+
+  removeExternalLink = (index: number) => {
+    (this.productFormGroup.get('externalLinks') as FormArray).removeAt(index);
+    this.productFormGroup.markAsDirty();
+  }
+
   onFileChange = (fileChangeEvent: any, controlName: string) => {
-    
     const file: File = fileChangeEvent.target.files[0];
-    
     if (file) {
       const fileReader = new FileReader();
       fileReader.addEventListener('load', fileReaderEvent => {
@@ -229,13 +253,6 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
     });
 
     image.src = dataUrl;
-  }
-
-  private resetImageElement = (controlName: string) => {
-    const element = this.getImageElementByControlName(controlName)
-    this.renderer2.setStyle(element, 'width', 0);
-    this.renderer2.setStyle(element, 'height', 0);
-    element.src = null;
   }
 
   private getImageElementByControlName = (controlName: string) => {

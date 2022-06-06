@@ -23,7 +23,6 @@
   .mat-form-field {
     width: 100%;
     margin-bottom: 16px;
-    background-color: global.$backgroud-color;
 
     ::ng-deep .mat-select-disabled {
 
@@ -34,6 +33,19 @@
       .mat-select-arrow {
         visibility: hidden;
       }
+    }
+  }
+
+  .external-link-row {
+    display: flex;
+    gap: 16px;
+
+    .site-form-field {
+      width: 128px;
+    }
+
+    button {
+      margin-top: 16px;
     }
   }
 

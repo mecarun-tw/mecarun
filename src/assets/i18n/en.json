@@ -38,6 +38,8 @@
         "PRICE": "Price",
         "SHORT_DESCRIPTION": "Short Description",
         "DESCRIPTION": "Description",
+        "EXTERNAL_LINKS": "External links",
+        "SITE": "Web site",
         "THUMBNAIL_URL": "Thumbnail",
         "IMAGE_URL": "Image"
       },

@@ -4,7 +4,7 @@
     <app-external-link-button
       *ngFor="let link of externalLinks"
       [externalUrl]="link.externalUrl"
-      [imageUrl]="link.imageUrl"
+      [imageUrl]="_getExternalLinkIconUrl(link.site)"
       [size]="'100px'">
     </app-external-link-button>
   </div>

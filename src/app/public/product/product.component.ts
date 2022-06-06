@@ -6,6 +6,7 @@ import { distinctUntilChanged, map, startWith, switchAll, takeUntil } from 'rxjs
 import { Product } from 'src/app/_interfaces/product.interface';
 import { ImagesService } from 'src/app/_services/images.service';
 import { ProductsService } from 'src/app/_services/products.service';
+import { getExternalLinkIconUrl } from 'src/app/_interfaces/external-link.interface';
 
 @Component({
   selector: 'app-product',
@@ -52,5 +53,9 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   getImageUrl = (imageUuid: string) => {
     return this.imagesService.getImageUrl(imageUuid);
+  }
+
+  _getExternalLinkIconUrl = (site: string) => {
+    return getExternalLinkIconUrl(site) as string;
   }
 }
