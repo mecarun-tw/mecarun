@@ -30,6 +30,10 @@ export class ProductsService {
     return this.productKeysets.get(language) as BehaviorSubject<ProductKey[]|null|undefined>;
   }
 
+  updateOrders = (productKeys: ProductKey[]): Promise<void> => {
+    return this.api.updateOrders(productKeys);
+  }
+
   getProductByUuid = (uuid: string): BehaviorSubject<Product|null|undefined> => {
     if (!this.products.has(uuid)) { // init
       const product$ = new BehaviorSubject<Product|null|undefined>(null);
@@ -72,7 +76,8 @@ export class ProductsService {
   }
 
   updateProduct = (product: Product): Promise<void> => {
-    return this.api.updateProductKey(product).then(productKeyResponse => {
+    const productKey = productToProductKey(product);
+    return this.api.updateProductKey(productKey).then(productKeyResponse => {
       const productKeys$ = this.getProductKeys(product.language);
       productKeys$.pipe(
         filter(productKeys => productKeys !== null),

@@ -1,6 +1,7 @@
 <div class="product-management-container">
-  <mat-list>
-    <mat-list-item *ngFor="let productKey of productKeys">
+  <mat-list cdkDropList (cdkDropListDropped)="drop($event)">
+    <mat-list-item *ngFor="let productKey of productKeys" cdkDrag>
+      <button mat-icon-button cdkDragHandle><mat-icon>drag_handle</mat-icon></button>
       {{productKey.name}}
       <span class="spacer"></span>
       <button
@@ -11,7 +12,7 @@
       </button>
       <button mat-icon-button (click)="deleteProduct(productKey.uuid)"><mat-icon>delete</mat-icon></button>
     </mat-list-item>
-   </mat-list>
+  </mat-list>
   
    <button mat-fab [matMenuTriggerFor]="languageMenu" [matMenuTriggerData]="{mode: 'create'}"><mat-icon>add</mat-icon></button>
   </div>

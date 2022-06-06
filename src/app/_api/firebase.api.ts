@@ -70,6 +70,17 @@ export class Api implements ApiInterface {
     });
   };
 
+  updateOrders = (productKeys: ProductKey[]) => {
+    const batch = this.angularFirestore.firestore.batch();
+    productKeys.forEach(productKey => {
+      batch.update(
+        this.angularFirestore.doc<ProductKey>('productKeys/' + productKey.uuid).ref,
+        {order: productKey.order}
+      );
+    });
+    return batch.commit();
+  };
+
   readProduct = (uuid: string) => {
     return this.angularFirestore.collection<Product>('products').doc<Product>(uuid).ref.get().then(doc => {
       if (doc.exists) {

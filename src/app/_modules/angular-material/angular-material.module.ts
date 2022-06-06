@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -26,6 +28,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatSelectModule,
     MatToolbarModule,
+    DragDropModule,
   ]
 })
 export class AngularMaterialModule { }

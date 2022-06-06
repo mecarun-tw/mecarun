@@ -13,6 +13,7 @@ export class Api implements ApiInterface {
       uuid: '80dc13d7-6feb-5f48-8bb3-98adc19e7c7c',
       productId: '56b53378-d5d5-43fa-bf2d-1a32899897f7',
       language: 'zh',
+      order: 0,
       name: 'P18 金屬處理劑',
       price: '250~1100 NTD',
       shortDescription: `
@@ -26,6 +27,7 @@ export class Api implements ApiInterface {
       uuid: '9f1cb967-2ce4-5005-bc10-37ff40d1b640',
       productId: '6e685ccc-0513-4c7e-88f0-f34fd4c92733',
       language: 'zh',
+      order: 1,
       name: 'C99汽油/柴油',
       price: '160~780 NTD',
       shortDescription: `
@@ -37,6 +39,7 @@ export class Api implements ApiInterface {
       uuid: 'f137a583-f7a2-5c7b-9272-27a2cc3cc361',
       productId: 'c52d59be-8c1d-4e97-a331-d45f58c4f967',
       language: 'zh',
+      order: 2,
       name: 'C99 Racing',
       price: '950 NTD',
       shortDescription: `
@@ -48,6 +51,7 @@ export class Api implements ApiInterface {
       uuid: '04cbc95d-a1e8-5eaa-a3b9-1067e8efe197',
       productId: '56b53378-d5d5-43fa-bf2d-1a32899897f7',
       language: 'en',
+      order: 3,
       name: 'P18 metal treatment agent',
       price: '8~35 USD',
       shortDescription: `
@@ -256,6 +260,12 @@ export class Api implements ApiInterface {
       this.productKeys.splice(index, 1);
       return Promise.resolve();
     }
+  };
+
+  updateOrders = (_productKeys: ProductKey[]) => {
+    console.log('api updateOrders');
+    this.productKeys = _productKeys;
+    return Promise.resolve();
   };
 
   readProduct = (uuid: string) => {

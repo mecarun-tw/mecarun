@@ -66,6 +66,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
       externalLinks: this.formBuilder.array([]),
       thumbnailUuid: [''],
       productImageUuid: [''],
+      order: [0],
     });
   }
   
@@ -111,6 +112,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
           externalLinks: product.externalLinks,
           thumbnailUuid: product.thumbnailUuid,
           productImageUuid: product.productImageUuid,
+          order: product.order,
         }, { emitEvent: false});
       } else { // create
         this.activatedRoute.queryParams.pipe(
@@ -152,6 +154,7 @@ export class ProductEditorComponent implements OnInit, AfterContentInit, OnDestr
         thumbnailUuid: this.productFormGroup.get('thumbnailUuid')?.value,
         productImageUuid: this.productFormGroup.get('productImageUuid')?.value,
         externalLinks: (this.productFormGroup.get('externalLinks') as FormArray).getRawValue(),
+        order: this.productFormGroup.get('order')?.value
       } as Product;
 
       if (this.uuid && this.productId) { // edit

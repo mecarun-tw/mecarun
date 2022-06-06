@@ -8,6 +8,7 @@ export interface ApiInterface {
   createProductKey: (productKey: ProductKey) => Promise<ProductKey>;
   updateProductKey: (productKey: ProductKey) => Promise<ProductKey>;
   deleteProductKey: (uuid: string) => Promise<void>;
+  updateOrders: (productKeys: ProductKey[]) => Promise<void>;
 
   readProduct: (uuid:string) => Promise<Product>;
   createProduct: (product: Product) => Promise<Product>;

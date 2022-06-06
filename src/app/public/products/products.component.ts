@@ -37,7 +37,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ).pipe(
       takeUntil(this.destroy$),
       map(language => this.productsService.getProductKeys(language)),
-      switchAll()
+      switchAll(),
+      map(productKeys => productKeys?.sort((a, b) => a.order < b.order ? -1 : 1)),
     ).subscribe(productKeys => this.productKeys$.next(productKeys));
 
     this.isOdd$ = this.productKeys$.pipe(

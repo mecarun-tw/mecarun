@@ -1,8 +1,9 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { filter, first, map, takeUntil } from 'rxjs/operators';
 import { ConfirmDeleteComponent } from 'src/app/_elements/dialogs/confirm-delete/confirm-delete.component';
 import { ProductKey, getProductUuid } from 'src/app/_interfaces/product.interface';
 import { ProductsService } from 'src/app/_services/products.service';
@@ -35,13 +36,15 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
       })
     ).pipe(
       takeUntil(this.destroy$),
-      map(productKeySets => ([] as ProductKey[]).concat(...productKeySets))
+      map(productKeySets => ([] as ProductKey[]).concat(...productKeySets)),
+      map(productKeys => productKeys?.sort((a, b) => a.order < b.order ? -1 : 1)),
     ).subscribe(productKeys => {
       this.productKeys = productKeys;
     });
   }
 
   ngOnDestroy(): void {
+    this.updateOrders();
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -71,4 +74,21 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
     }
   }
 
+  drop = (event: CdkDragDrop<ProductKey[]>) => {
+    moveItemInArray(this.productKeys, event.previousIndex, event.currentIndex);
+  }
+
+  updateOrders = () => {
+    let orderDirty = false;
+    this.productKeys.forEach((productKey, index) => {
+      const isOrdered = productKey.order === index;
+      if (!isOrdered) {
+        productKey.order = index;
+        orderDirty = true;
+      }
+    });
+    if (orderDirty) {
+      this.productsService.updateOrders(this.productKeys)
+    }
+  }
 }

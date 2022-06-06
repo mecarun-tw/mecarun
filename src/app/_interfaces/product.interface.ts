@@ -6,6 +6,7 @@ export interface ProductKey {
   uuid: string; // uuid = uuidv5()
   productId: string;
   language: string;
+  order: number;
   name: string;
   price: string;
   shortDescription: string;
@@ -31,5 +32,6 @@ export function productToProductKey (product: Product): ProductKey {
     price: product.price,
     shortDescription: product.shortDescription,
     thumbnailUuid: product.thumbnailUuid,
+    order: product.order,
   } as ProductKey;
 }
